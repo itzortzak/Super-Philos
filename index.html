@@ -1,0 +1,506 @@
+<!doctype html>
+<html lang="el">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Super Φιλόλογος — εἰμί &amp; λύω | v3.0</title>
+<style>
+:root{color-scheme:dark;--bg:#071524;--panel:#0e253b;--panel2:#142f47;--ink:#f7f5e9;--muted:#aec0cd;--gold:#ffd166;--mint:#65e5bb;--red:#ff817e;--line:#35516a}
+*{box-sizing:border-box}html,body{height:100%;margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,'Segoe UI',sans-serif}button,select,input{font:inherit}button{cursor:pointer}button:focus-visible,select:focus-visible{outline:3px solid var(--mint);outline-offset:2px}
+.shell{max-width:1280px;margin:auto;padding:12px;display:flex;flex-direction:column;gap:10px}.header{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px}.brand{display:flex;gap:10px;align-items:center}.logo{background:linear-gradient(135deg,#f9b84b,#e97059);width:47px;height:47px;border-radius:13px;display:grid;place-items:center;color:#15202e;font-size:27px;font-weight:1000;box-shadow:0 5px 0 #865832}.brand h1{font-size:clamp(20px,2.7vw,28px);margin:0;line-height:1.12}.brand small,.muted{color:var(--muted)}.headtools{display:flex;gap:6px;flex-wrap:wrap}.btn{border:1px solid #51718b;background:#1a3c58;color:white;padding:9px 12px;border-radius:11px;font-weight:700}.btn:hover{background:#275272}.btn.primary{background:var(--gold);color:#172133;border-color:#f8ca66}.btn.ghost{background:transparent}.hud{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:7px}.stat{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:8px 10px;min-width:0}.stat span{display:block;color:var(--muted);font-size:11px}.stat strong{display:block;font-variant-numeric:tabular-nums;font-size:clamp(14px,2vw,20px);white-space:nowrap}.gamebox{position:relative;border:2px solid #34506b;border-radius:18px;overflow:hidden;min-height:280px;box-shadow:0 12px 28px #0005;background:#78cee8}.gamebox canvas{width:100%;height:auto;display:block;aspect-ratio:1000/440;touch-action:none}.gamehint{position:absolute;top:10px;left:12px;background:#091f35bf;padding:6px 10px;font-size:12px;border-radius:20px;pointer-events:none}.controls{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}.touchpad{display:flex;gap:8px;align-items:center}.key{min-width:54px;min-height:46px;background:#1b4564;border:1px solid #527f9e;border-radius:12px;color:white;font-weight:800;font-size:22px;touch-action:none;user-select:none}.key:active,.key.pressed{background:#3c7798}.tip{color:var(--muted);font-size:12px}.progresswrap{background:#1e3e57;height:9px;border-radius:9px;overflow:hidden}.progress{height:100%;width:0%;background:linear-gradient(90deg,#46ccae,#f4d26a);transition:width .25s}.details{display:flex;flex-wrap:wrap;gap:8px;font-size:12px;color:#d4e3ef;justify-content:space-between}.details a{color:#9cddff}.overlay{position:fixed;inset:0;background:#04111ecc;display:flex;align-items:center;justify-content:center;padding:14px;z-index:20;overflow:auto}.overlay[hidden]{display:none}.dialog{width:min(680px,100%);max-height:min(94vh,920px);overflow:auto;background:linear-gradient(160deg,#12324c,#091d30);border:1px solid #607f98;border-radius:20px;padding:clamp(16px,3vw,28px);box-shadow:0 24px 80px #0009}.dialog.wide{width:min(920px,100%)}h2{font-size:25px;margin:0 0 9px}h3{font-size:18px;margin:14px 0 8px}p{line-height:1.5}.subtle{color:#afc7d7;font-size:13px}.ribbon{display:inline-block;font-size:12px;background:#25495f;padding:5px 9px;border-radius:20px;color:var(--mint);font-weight:800;margin-bottom:9px}.fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:18px 0}.field label{font-size:12px;color:#c5d9e8;display:block;margin-bottom:5px}.field select{width:100%;background:#e7f1f8;color:#102438;border:0;border-radius:10px;padding:11px}.actions{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0 0}.notice{font-size:13px;border-left:3px solid var(--gold);padding:10px 13px;background:#19384b;border-radius:0 9px 9px 0;margin-top:14px}.qprompt{font-size:16px;margin-top:6px}.greek{font-family:Georgia,'Times New Roman',serif;font-size:clamp(27px,5vw,37px);font-weight:700;line-height:1.3;letter-spacing:.2px}.options{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:17px 0}.choice{background:#214961;color:#fff;border:1.5px solid #42647a;padding:17px 10px;border-radius:11px;text-align:center;min-height:72px;font-family:Georgia,'Times New Roman',serif;font-size:23px}.choice:hover:not(:disabled){background:#316680}.choice:disabled{cursor:default;opacity:.88}.choice.correct{background:#1b6e5a;border-color:#9beac4}.choice.wrong{background:#87424b;border-color:#ffc2ae}.feedback{min-height:26px;font-weight:750;color:#f9d586}.report{width:100%;border-collapse:collapse;font-size:12px}.report th,.report td{text-align:left;padding:9px 6px;border-bottom:1px solid #36536b;vertical-align:top}.report th{color:#bfe5f1;position:sticky;top:0;background:#11314a}.pill{font-size:12px;border:1px solid #4b7390;border-radius:14px;padding:3px 7px;color:#d1e8f5}.results{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}.resultnum{background:#173b53;border-radius:10px;padding:12px;text-align:center}.resultnum b{display:block;font-size:23px}.resultnum small{color:#bfd1df}.banner{font-size:14px;color:var(--muted)}.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);border:0}
+@media(max-width:680px){.hud{grid-template-columns:repeat(3,1fr)}.stat{padding:6px 8px}.shell{padding:8px;gap:7px}.gamehint{font-size:10px}.fields{grid-template-columns:1fr}.options{grid-template-columns:1fr}.choice{min-height:54px;padding:9px}.tip{display:none}.dialog{max-height:96vh}.results{grid-template-columns:repeat(3,1fr)}.resultnum b{font-size:18px}}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
+
+.fields{grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.field.widefield{grid-column:span 2}
+.field label{font-size:12px;font-weight:700}
+.field select{padding:10px 9px}
+.group-title{color:#ffd987;font-weight:800;font-size:13px;margin:18px 0 -8px;border-bottom:1px solid #486078;padding-bottom:5px}
+.filter-status{padding:10px 13px;background:#124538;color:#d2ffe7;border-radius:10px;font-size:13px;margin:6px 0}
+.filter-status.warn{background:#5e3034;color:#ffe0e0}
+.subheading{font-size:12px;color:#bdcedd;margin-top:3px}
+@media(max-width:750px){.fields{grid-template-columns:repeat(2,minmax(0,1fr))}.field.widefield{grid-column:span 2}}
+@media(max-width:520px){.fields{grid-template-columns:1fr}.field.widefield{grid-column:span 1}}
+</style>
+</head>
+<body>
+<div class="shell">
+  <header class="header"><div class="brand"><div class="logo" aria-hidden="true">Φ</div><div><h1>SUPER ΦΙΛΟΛΟΓΟΣ</h1><small>Το ταξίδι των ρημάτων • εἰμί &amp; λύω • v3.0 • χωρίς δυϊκό</small></div></div><div class="headtools"><button id="pauseBtn" class="btn ghost">⏸ Παύση</button><button id="restartBtn" class="btn">↻ Νέο παιχνίδι</button><button id="helpBtn" class="btn ghost">? Οδηγίες</button></div></header>
+  <div class="hud" aria-live="polite"><div class="stat"><span>Ερωτήσεις</span><strong id="hProgress">0/0</strong></div><div class="stat"><span>Σωστές</span><strong id="hRight">0</strong></div><div class="stat"><span>Βαθμοί</span><strong id="hScore">0</strong></div><div class="stat"><span>Καρδιές</span><strong id="hLives">♥ ♥ ♥</strong></div><div class="stat"><span>Χρόνος πίστας</span><strong id="hPlay">00:00</strong></div><div class="stat"><span>Χρόνος ερωτήσεων</span><strong id="hQuiz">00:00</strong></div></div>
+  <div class="gamebox"><canvas id="game" width="1000" height="440" aria-label="Πίστα πλατφόρμας. Με τα βελάκια κινείστε και με διάστημα πηδάτε. Ερωτήσεις στις πύλες."></canvas><div class="gamehint" id="hint">Όλοι οι τύποι · χωρίς δυϊκό · αποθήκευση προόδου</div></div>
+  <div class="progresswrap" aria-label="Πρόοδος πίστας"><div class="progress" id="levelProgress"></div></div>
+  <div class="controls"><div class="touchpad" aria-label="Κουμπιά χειρισμού"><button id="leftBtn" class="key" aria-label="Αριστερά">◀</button><button id="rightBtn" class="key" aria-label="Δεξιά">▶</button><button id="jumpBtn" class="key" aria-label="Άλμα">↑</button></div><div class="tip">Πλήκτρα: ← → ή A/D • άλμα: διάστημα / ↑ • απαντήσεις: 1–4 • P: παύση</div><span id="courseLabel" class="pill">Πλήρης μορφολογική διαδρομή</span></div>
+  <footer class="details"><span>Μορφολογία αττικής διαλέκτου • αποθήκευση τοπικά (δεν αποστέλλονται δεδομένα)</span><span>Βάση: <a href="https://services.perseids.org/sg/body.1_div1.2_div2.9.html" target="_blank" rel="noopener">Smyth, λύω §383</a> · <a href="https://services.perseids.org/sg/body.1_div1.2_div2.10.html" target="_blank" rel="noopener">Smyth, εἰμί §768</a> · <a href="https://latistor.blogspot.com/2023/07/blog-post_42.html" target="_blank" rel="noopener">αναλυτική κλίση λύω</a> · <a href="https://latistor.blogspot.com/2021/01/blog-post_29.html" target="_blank" rel="noopener">εἰμί / γίγνομαι</a></span></footer>
+</div>
+<div class="overlay" id="startLayer"><div class="dialog wide">
+<span class="ribbon">ΕΚΠΑΙΔΕΥΤΙΚΟ ΠΑΙΧΝΙΔΙ ΠΛΑΤΦΟΡΜΑΣ • v3.0</span>
+<h2 id="startTitle">Super Φιλόλογος — Οι πύλες της γραμματικής</h2>
+<p>Πέρνα τις πύλες με αναγνώριση και σχηματισμό όλων των διαθέσιμων προσωπικών τύπων, απαρεμφάτων και πτώσεων μετοχών του <b>εἰμί</b> και του <b>λύω</b>. Οι συμπληρωματικοί χρόνοι του <b>γίγνομαι</b> παρέχονται χωριστά. Επίλεξε <b>«ΟΛΟΙ οι τύποι»</b> για πλήρη κάλυψη χωρίς παράλειψη· η πρόοδος αποθηκεύεται στον υπολογιστή.</p>
+<div class="group-title">1. ΘΕΜΑΤΙΚΗ ΠΙΣΤΑ</div>
+<div class="fields"><div class="field widefield"><label for="chapterSel">Ενότητα / κεφάλαιο</label><select id="chapterSel">
+<option value="first">Α΄ • Πρώτες πύλες — οριστική ενεστώτα</option>
+<option value="eimi">Β΄ • Το ρήμα εἰμί</option>
+<option value="present">Γ΄ • Ενεστώτας του λύω — όλες οι εγκλίσεις</option>
+<option value="past">Δ΄ • Παρατατικός — οριστική</option>
+<option value="future">Ε΄ • Μέλλοντας — ενεργητική, μέση, παθητική</option>
+<option value="aorist">ΣΤ΄ • Αόριστος — εγκλίσεις και φωνές</option>
+<option value="perfect">Ζ΄ • Παρακείμενος — φωνές και εγκλίσεις</option>
+<option value="pluperfect">Η΄ • Υπερσυντέλικος — οριστική</option>
+<option value="optative">Θ΄ • Ευκτική και μορφολογική αναγνώριση</option>
+<option value="imperative">Ι΄ • Προστακτική</option>
+<option value="participles">ΙΑ΄ • Μετοχές — γένη και πτώσεις</option>
+<option value="advanced">ΙΒ΄ • Προχωρημένοι τύποι και παραλλαγές</option>
+<option value="supplement">ΙΓ΄ • Συμπληρωματικοί χρόνοι του γίγνομαι</option><option value="custom">Ελεύθερη επιλογή — προσωπική πίστα</option></select></div>
+<div class="field"><label for="tierSel">Γραμματική δυσκολία</label><select id="tierSel"><option value="1">Βασικό</option><option value="2">Μεσαίο</option><option value="3" selected>Προχωρημένο • και σπάνιοι τύποι</option></select></div></div>
+<div class="group-title">2. ΦΙΛΤΡΑ ΥΛΗΣ</div>
+<div class="fields">
+<div class="field"><label for="verbSel">Ρήμα</label><select id="verbSel"><option value="all3" selected>εἰμί, λύω και συμπληρωματικό γίγνομαι</option><option value="both">εἰμί και λύω</option><option value="eimi">εἰμί</option><option value="lyo">λύω</option><option value="ginomai">γίγνομαι (συμπληρωματικά συστήματα)</option></select></div>
+<div class="field"><label for="tenseSel">Χρόνος</label><select id="tenseSel"><option value="all">Όλοι οι διαθέσιμοι</option><option>Ενεστώτας</option><option>Παρατατικός</option><option>Μέλλοντας</option><option>Αόριστος</option><option>Παρακείμενος</option><option>Υπερσυντέλικος</option><option>Συντελεσμένος μέλλοντας</option></select></div>
+<div class="field"><label for="moodSel">Έγκλιση / ρηματικός τύπος</label><select id="moodSel"><option value="all">Όλες οι διαθέσιμες</option><option>Οριστική</option><option>Υποτακτική</option><option>Ευκτική</option><option>Προστακτική</option><option>Απαρέμφατο</option><option>Μετοχή</option></select></div>
+<div class="field"><label for="voiceSel">Φωνή</label><select id="voiceSel"><option value="all">Όλες οι διαθέσιμες</option><option>Ενεργητική</option><option>Μέση</option><option>Παθητική</option><option>Μέση/παθητική</option><option>Μέση (μορφολογικά)</option></select></div>
+<div class="field"><label for="kindSel">Κατηγορία τύπου</label><select id="kindSel"><option value="all">Όλες</option><option>Προσωπικός τύπος</option><option>Απαρέμφατο</option><option>Μετοχή</option></select></div>
+<div class="field"><label for="personSel">Πρόσωπο</label><select id="personSel"><option value="all">Όλα</option><option value="α΄">α΄</option><option value="β΄">β΄</option><option value="γ΄">γ΄</option></select></div>
+<div class="field"><label for="numberSel">Αριθμός</label><select id="numberSel"><option value="all">Ενικός και πληθυντικός</option><option value="ενικός">Ενικός</option><option value="πληθυντικός">Πληθυντικός</option></select></div>
+<div class="field"><label for="questionModeSel">Είδος άσκησης</label><select id="questionModeSel"><option value="both">Σχηματισμός και αναγνώριση</option><option value="form">Σχηματισμός τύπου</option><option value="analyse">Αναγνώριση τύπου</option></select></div>
+<div class="field"><label for="genderSel">Γένος μετοχής</label><select id="genderSel"><option value="all">Όλα</option><option>Αρσενικό</option><option>Θηλυκό</option><option>Ουδέτερο</option></select></div>
+<div class="field"><label for="caseSel">Πτώση μετοχής</label><select id="caseSel"><option value="all">Όλες οι πτώσεις</option><option>Ονομαστική</option><option>Γενική</option><option>Δοτική</option><option>Αιτιατική</option><option>Κλητική</option></select></div>
+</div>
+<div class="group-title">3. ΠΑΙΧΝΙΔΙ</div>
+<div class="fields"><div class="field"><label for="countSel">Πύλες / ερωτήσεις</label><select id="countSel"><option value="12">12</option><option value="16">16</option><option value="24">24</option><option value="32">32</option><option value="all" selected>ΟΛΟΙ οι τύποι — πλήρης διαδρομή</option></select></div><div class="field"><label for="difficultySel">Δυσκολία πίστας</label><select id="difficultySel"><option value="easy">Ήπια • λιγότερα εμπόδια</option><option value="normal" selected>Κανονική</option><option value="hard">Δύσκολη • περισσότερα εμπόδια</option></select></div></div>
+<div id="filterStatus" class="filter-status" aria-live="polite"></div><div class="notice" id="campaignNotice">Στη λειτουργία <b>«ΟΛΟΙ οι τύποι»</b> κάθε εγγραφή εμφανίζεται ακριβώς μία φορά. Οι πύλες οργανώνονται σε διαδοχικά τμήματα των οκτώ, ώστε η πίστα να μην επιβαρύνει τον υπολογιστή. Ο τερματισμός επιτρέπεται μόνο όταν έχουν απαντηθεί όλες οι ερωτήσεις. <button class="btn" id="resumeSavedBtn" hidden>↪ Συνέχεια αποθηκευμένης διαδρομής</button></div>
+<div class="notice">Αποκλείεται <b>εντελώς ο δυϊκός αριθμός</b>. Οι σπάνιες μορφές, οι εναλλακτικές γραφές και ο συντελεσμένος μέλλοντας εμφανίζονται <b>μόνο στο προχωρημένο</b>. Το <b>εἰμί</b> δεν διαθέτει δικό του αόριστο ή παρακείμενο: οι τύποι <b>ἐγενόμην, γέγονα</b> ανήκουν στο <b>γίγνομαι</b> και διδάσκονται χωριστά. Οι μη διαθέσιμοι συνδυασμοί αποκλείονται από τα φίλτρα.</div>
+<div class="actions"><button class="btn primary" id="startBtn">▶ Έναρξη παιχνιδιού</button><button class="btn ghost" id="exportBankBtn">⇩ Εξαγωγή πλήρους κλιτικού καταλόγου</button><button class="btn ghost" id="paradigmBtn">📚 Πίνακες κλίσης</button><button class="btn ghost" id="morphBtn">📖 Γραμματική κάλυψη και πηγές</button></div>
+<div id="coverage" hidden class="subtle" style="margin-top:14px"></div></div></div>
+<div class="overlay" id="questionLayer" hidden><div class="dialog" role="dialog" aria-modal="true" aria-labelledby="qTitle"><span class="ribbon" id="qType">ΠΥΛΗ ΓΝΩΣΗΣ</span><h2 id="qTitle">Διάλεξε τον σωστό τύπο</h2><div class="qprompt" id="qPrompt"></div><div class="greek" id="qGreek"></div><div class="options" id="qOptions"></div><div class="feedback" id="qFeedback" aria-live="polite"></div><div class="actions"><button id="nextBtn" class="btn primary" hidden>Συνέχεια →</button><span id="qCountLabel" class="subtle"></span></div></div></div>
+
+<div class="overlay" id="paradigmLayer" hidden style="z-index:35"><div class="dialog wide">
+<span class="ribbon">ΠΛΗΡΗΣ ΚΛΙΣΗ • ΕΝΙΚΟΣ ΚΑΙ ΠΛΗΘΥΝΤΙΚΟΣ</span>
+<h2>Αναλυτικοί πίνακες ρηματικών και ονοματικών τύπων</h2>
+<p class="subtle">Προσωπικοί τύποι, απαρέμφατα και μετοχές σε όλα τα γένη και τις πτώσεις. Οι μορφές του γίγνομαι παρουσιάζονται ξεχωριστά. Οι πίνακες περιλαμβάνουν μόνο συνδυασμούς που υπάρχουν στη βάση.</p>
+<div class="fields"><div class="field"><label>Ρήμα</label><select id="tabVerb"><option value="all">Όλα</option></select></div><div class="field"><label>Χρόνος</label><select id="tabTense"><option value="all">Όλοι</option></select></div><div class="field"><label>Φωνή</label><select id="tabVoice"><option value="all">Όλες</option></select></div><div class="field"><label>Έγκλιση/τύπος</label><select id="tabMood"><option value="all">Όλες</option></select></div></div>
+<p id="tableStatus" class="filter-status"></p><div style="max-height:410px;overflow:auto"><table class="report"><thead><tr><th>Ρήμα</th><th>Χρόνος</th><th>Φωνή</th><th>Έγκλιση</th><th>Πρόσωπο · αριθμός / γένος · πτώση</th><th>Τύπος</th></tr></thead><tbody id="tableBody"></tbody></table></div>
+<div class="actions"><button class="btn" id="tablePrev">← Προηγούμενα</button><button class="btn" id="tableNext">Επόμενα →</button><button class="btn primary" id="tableClose">Κλείσιμο</button></div>
+</div></div>
+<div class="overlay" id="pauseLayer" hidden><div class="dialog"><h2>⏸ Παύση</h2><p>Η χρονομέτρηση και η πίστα έχουν σταματήσει.</p><div class="actions"><button class="btn primary" id="resumeBtn">Συνέχεια</button><button class="btn" id="newFromPause">Νέο παιχνίδι</button></div></div></div>
+<div class="overlay" id="endLayer" hidden><div class="dialog wide"><span class="ribbon">ΤΕΛΟΣ ΠΕΡΙΠΕΤΕΙΑΣ</span><h2 id="endTitle">Ολοκλήρωσες την πίστα!</h2><p class="banner" id="endMessage"></p><div class="results"><div class="resultnum"><b id="resCorrect">0/0</b><small>Σωστές απαντήσεις</small></div><div class="resultnum"><b id="resScore">0</b><small>Βαθμοί</small></div><div class="resultnum"><b id="resPercent">0%</b><small>Επιτυχία</small></div><div class="resultnum"><b id="resPlay">00:00</b><small>Χρόνος πίστας</small></div><div class="resultnum"><b id="resQuiz">00:00</b><small>Χρόνος ερωτήσεων</small></div><div class="resultnum"><b id="resTotal">00:00</b><small>Συνολικός χρόνος</small></div></div><div class="actions"><button class="btn primary" id="againBtn">↻ Παίξε ξανά</button><button class="btn" id="showAnswersBtn">Προβολή απαντήσεων</button><button class="btn ghost" id="csvBtn">Εξαγωγή αποτελεσμάτων CSV</button></div><section id="reviewSection" hidden><h3>Αναλυτική ανατροφοδότηση</h3><div style="overflow-x:auto"><table class="report"><thead><tr><th>#</th><th>Ερώτηση</th><th>Απάντηση παίκτη</th><th>Σωστή απάντηση</th><th>Αποτέλεσμα</th></tr></thead><tbody id="reportRows"></tbody></table></div></section></div></div>
+<script>
+'use strict';
+// Τα προσωπικά παραδείγματα βασίζονται στη γραμματική Smyth §§ 383, 768.
+// Κωδικοποίηση: 1ε, 2ε, 3ε, 1π, 2π, 3π. Ο δυϊκός δεν συλλέγεται.
+const rows=[], tenses=['Ενεστώτας','Παρατατικός','Μέλλοντας','Αόριστος','Παρακείμενος','Υπερσυντέλικος','Συντελεσμένος μέλλοντας'];
+const voices=['Ενεργητική','Μέση','Παθητική','Μέση/παθητική','Μέση (μορφολογικά)'];
+const persons=[['α΄','ενικός'],['β΄','ενικός'],['γ΄','ενικός'],['α΄','πληθυντικός'],['β΄','πληθυντικός'],['γ΄','πληθυντικός']];
+const CASES=['Ονομαστική','Γενική','Δοτική','Αιτιατική','Κλητική'];
+const GENDERS=['Αρσενικό','Θηλυκό','Ουδέτερο'];
+const NUMS=['Ενικός','Πληθυντικός'];
+function add(v,t,voice,mood,forms){const a=forms.split('|'); if(a.length!==6)throw Error('Λανθασμένο μήκος '+v+' '+t+' '+mood+' '+a.length);a.forEach((s,i)=>{if(s==='—'||!s)return;s.split('/').forEach((form,variant)=>rows.push({verb:v,tense:t,voice,mood,person:persons[i][0],number:persons[i][1],form:form.trim(),kind:'Προσωπικός τύπος',variant:variant>0}));});}
+function inf(v,t,voice,form){rows.push({verb:v,tense:t,voice,mood:'Απαρέμφατο',form,kind:'Απαρέμφατο'});}
+function part(v,t,voice,g,num,forms){const a=forms.split('|');if(a.length!==4)throw Error('Μετοχή: '+forms); a.push((g===0&&num===0&&/(?:μενος|μένος)$/u.test(a[0]))?a[0].replace(/ος$/u,'ε'):a[0]); /* -μενος: κλητική αρσενικού ενικού σε -μενε· οι λοιπές συνήθως ίδια με την ονομαστική */a.forEach((f,i)=>rows.push({verb:v,tense:t,voice,mood:'Μετοχή',gender:GENDERS[g],number:NUMS[num],gramCase:CASES[i],form:f.trim(),kind:'Μετοχή'}));}
+// εἰμί — ενεστώτας, παρατατικός, μέλλοντας (μέσοι τύποι), κλασική αττική.
+add('εἰμί','Ενεστώτας','Ενεργητική','Οριστική','εἰμί|εἶ|ἐστί/ἐστίν|ἐσμέν|ἐστέ|εἰσί/εἰσίν');
+add('εἰμί','Ενεστώτας','Ενεργητική','Υποτακτική','ὦ|ᾖς|ᾖ|ὦμεν|ἦτε|ὦσι/ὦσιν');
+add('εἰμί','Ενεστώτας','Ενεργητική','Ευκτική','εἴην|εἴης|εἴη|εἴημεν/εἶμεν|εἴητε/εἶτε|εἶεν/εἴησαν');
+add('εἰμί','Ενεστώτας','Ενεργητική','Προστακτική','—|ἴσθι|ἔστω|—|ἔστε|ἔστων/ὄντων/ἔστωσαν');
+add('εἰμί','Παρατατικός','Ενεργητική','Οριστική','ἦν/ἦ|ἦσθα|ἦν|ἦμεν|ἦτε/ἦστε|ἦσαν');
+add('εἰμί','Μέλλοντας','Μέση (μορφολογικά)','Οριστική','ἔσομαι|ἔσῃ/ἔσει|ἔσται|ἐσόμεθα|ἔσεσθε|ἔσονται');
+add('εἰμί','Μέλλοντας','Μέση (μορφολογικά)','Ευκτική','ἐσοίμην|ἔσοιο|ἔσοιτο|ἐσοίμεθα|ἔσοισθε|ἔσοιντο');
+inf('εἰμί','Ενεστώτας','Ενεργητική','εἶναι');inf('εἰμί','Μέλλοντας','Μέση (μορφολογικά)','ἔσεσθαι');
+// λύω — κοινό πρότυπο: μέση/παθητική στον ενεστώτα, παρατατικό, παρακείμενο, υπερσυντέλικο.
+add('λύω','Ενεστώτας','Ενεργητική','Οριστική','λύω|λύεις|λύει|λύομεν|λύετε|λύουσι/λύουσιν');
+add('λύω','Ενεστώτας','Ενεργητική','Υποτακτική','λύω|λύῃς|λύῃ|λύωμεν|λύητε|λύωσι/λύωσιν');
+add('λύω','Ενεστώτας','Ενεργητική','Ευκτική','λύοιμι|λύοις|λύοι|λύοιμεν|λύοιτε|λύοιεν');
+add('λύω','Ενεστώτας','Ενεργητική','Προστακτική','—|λῦε|λυέτω|—|λύετε|λυόντων/λυέτωσαν');
+add('λύω','Παρατατικός','Ενεργητική','Οριστική','ἔλυον|ἔλυες|ἔλυε|ἐλύομεν|ἐλύετε|ἔλυον');
+add('λύω','Μέλλοντας','Ενεργητική','Οριστική','λύσω|λύσεις|λύσει|λύσομεν|λύσετε|λύσουσι/λύσουσιν');
+add('λύω','Μέλλοντας','Ενεργητική','Ευκτική','λύσοιμι|λύσοις|λύσοι|λύσοιμεν|λύσοιτε|λύσοιεν');
+add('λύω','Αόριστος','Ενεργητική','Οριστική','ἔλυσα|ἔλυσας|ἔλυσε/ἔλυσεν|ἐλύσαμεν|ἐλύσατε|ἔλυσαν');
+add('λύω','Αόριστος','Ενεργητική','Υποτακτική','λύσω|λύσῃς|λύσῃ|λύσωμεν|λύσητε|λύσωσι/λύσωσιν');
+add('λύω','Αόριστος','Ενεργητική','Ευκτική','λύσαιμι|λύσαις/λύσειας|λύσαι/λύσειε|λύσαιμεν|λύσαιτε|λύσαιεν/λύσειαν');
+add('λύω','Αόριστος','Ενεργητική','Προστακτική','—|λῦσον|λυσάτω|—|λύσατε|λυσάντων/λυσάτωσαν');
+add('λύω','Παρακείμενος','Ενεργητική','Οριστική','λέλυκα|λέλυκας|λέλυκε/λέλυκεν|λελύκαμεν|λελύκατε|λελύκασι/λελύκασιν');
+add('λύω','Παρακείμενος','Ενεργητική','Υποτακτική','λελύκω|λελύκῃς|λελύκῃ|λελύκωμεν|λελύκητε|λελύκωσι/λελύκωσιν');
+add('λύω','Παρακείμενος','Ενεργητική','Ευκτική','λελύκοιμι|λελύκοις/λελύκοιης|λελύκοι/λελύκοιη|λελύκοιμεν|λελύκοιτε|λελύκοιεν');
+add('λύω','Υπερσυντέλικος','Ενεργητική','Οριστική','ἐλελύκειν|ἐλελύκεις|ἐλελύκει|ἐλελύκεμεν|ἐλελύκετε|ἐλελύκεσαν');
+add('λύω','Ενεστώτας','Μέση/παθητική','Οριστική','λύομαι|λύῃ/λύει|λύεται|λυόμεθα|λύεσθε|λύονται');
+add('λύω','Ενεστώτας','Μέση/παθητική','Υποτακτική','λύωμαι|λύῃ|λύηται|λυώμεθα|λύησθε|λύωνται');
+add('λύω','Ενεστώτας','Μέση/παθητική','Ευκτική','λυοίμην|λύοιο|λύοιτο|λυοίμεθα|λύοισθε|λύοιντο');
+add('λύω','Ενεστώτας','Μέση/παθητική','Προστακτική','—|λύου|λυέσθω|—|λύεσθε|λυέσθων/λυέσθωσαν');
+add('λύω','Παρατατικός','Μέση/παθητική','Οριστική','ἐλυόμην|ἐλύου|ἐλύετο|ἐλυόμεθα|ἐλύεσθε|ἐλύοντο');
+add('λύω','Μέλλοντας','Μέση','Οριστική','λύσομαι|λύσῃ/λύσει|λύσεται|λυσόμεθα|λύσεσθε|λύσονται');
+add('λύω','Μέλλοντας','Μέση','Ευκτική','λυσοίμην|λύσοιο|λύσοιτο|λυσοίμεθα|λύσοισθε|λύσοιντο');
+add('λύω','Αόριστος','Μέση','Οριστική','ἐλυσάμην|ἐλύσω|ἐλύσατο|ἐλυσάμεθα|ἐλύσασθε|ἐλύσαντο');
+add('λύω','Αόριστος','Μέση','Υποτακτική','λύσωμαι|λύσῃ|λύσηται|λυσώμεθα|λύσησθε|λύσωνται');
+add('λύω','Αόριστος','Μέση','Ευκτική','λυσαίμην|λύσαιο|λύσαιτο|λυσαίμεθα|λύσαισθε|λύσαιντο');
+add('λύω','Αόριστος','Μέση','Προστακτική','—|λῦσαι|λυσάσθω|—|λύσασθε|λυσάσθων/λυσάσθωσαν');
+add('λύω','Αόριστος','Παθητική','Οριστική','ἐλύθην|ἐλύθης|ἐλύθη|ἐλύθημεν|ἐλύθητε|ἐλύθησαν');
+add('λύω','Αόριστος','Παθητική','Υποτακτική','λυθῶ|λυθῇς|λυθῇ|λυθῶμεν|λυθῆτε|λυθῶσι');
+add('λύω','Αόριστος','Παθητική','Ευκτική','λυθείην|λυθείης|λυθείη|λυθεῖμεν/λυθείημεν|λυθεῖτε/λυθείητε|λυθεῖεν/λυθείησαν');
+add('λύω','Αόριστος','Παθητική','Προστακτική','—|λύθητι|λυθήτω|—|λύθητε|λυθέντων/λυθήτωσαν');
+add('λύω','Μέλλοντας','Παθητική','Οριστική','λυθήσομαι|λυθήσῃ/λυθήσει|λυθήσεται|λυθησόμεθα|λυθήσεσθε|λυθήσονται');
+add('λύω','Μέλλοντας','Παθητική','Ευκτική','λυθησοίμην|λυθήσοιο|λυθήσοιτο|λυθησοίμεθα|λυθήσοισθε|λυθήσοιντο');
+add('λύω','Παρακείμενος','Μέση/παθητική','Οριστική','λέλυμαι|λέλυσαι|λέλυται|λελύμεθα|λέλυσθε|λέλυνται');
+add('λύω','Παρακείμενος','Μέση/παθητική','Προστακτική','—|λέλυσο|λελύσθω|—|λέλυσθε|λελύσθων/λελύσθωσαν');
+add('λύω','Υπερσυντέλικος','Μέση/παθητική','Οριστική','ἐλελύμην|ἐλέλυσο|ἐλέλυτο|ἐλελύμεθα|ἐλέλυσθε|ἐλέλυντο');
+add('λύω','Συντελεσμένος μέλλοντας','Μέση/παθητική','Οριστική','λελύσομαι|λελύσῃ/λελύσει|λελύσεται|λελυσόμεθα|λελύσεσθε|λελύσονται');
+add('λύω','Συντελεσμένος μέλλοντας','Μέση/παθητική','Ευκτική','λελυσοίμην|λελύσοιο|λελύσοιτο|λελυσοίμεθα|λελύσοισθε|λελύσοιντο');
+// Εγκλίσεις παρακειμένου μέσης/παθητικής: περιφραστικοί τύποι με ονομαστική αρσενικού (διδακτικό παράδειγμα).
+const eiSub=['ὦ','ᾖς','ᾖ','ὦμεν','ἦτε','ὦσι'];
+const eiOpt=['εἴην','εἴης','εἴη','εἴημεν','εἴητε','εἴησαν'];
+const perfectMidPart=['λελυμένος','λελυμένος','λελυμένος','λελυμένοι','λελυμένοι','λελυμένοι'];
+for(const [m,a] of [['Υποτακτική',eiSub],['Ευκτική',eiOpt]]){
+ for(let i=0;i<6;i++)for(const g of GENDERS){
+  const single=i<3;
+  const participle=single?{Αρσενικό:'λελυμένος',Θηλυκό:'λελυμένη',Ουδέτερο:'λελυμένον'}[g]:{Αρσενικό:'λελυμένοι',Θηλυκό:'λελυμέναι',Ουδέτερο:'λελυμένα'}[g];
+  rows.push({verb:'λύω',tense:'Παρακείμενος',voice:'Μέση/παθητική',mood:m,person:persons[i][0],number:persons[i][1],gender:g,form:participle+' '+a[i],kind:'Προσωπικός τύπος',note:'Περιφραστικός τύπος: μετοχή παρακειμένου σε ονομαστική + εἰμί.'});
+ }
+}
+// Απαρέμφατα (μοναδικοί ρηματικοί τύποι χωρίς πρόσωπο).
+[
+['Ενεστώτας','Ενεργητική','λύειν'],['Ενεστώτας','Μέση/παθητική','λύεσθαι'],
+['Μέλλοντας','Ενεργητική','λύσειν'],['Μέλλοντας','Μέση','λύσεσθαι'],['Μέλλοντας','Παθητική','λυθήσεσθαι'],
+['Αόριστος','Ενεργητική','λῦσαι'],['Αόριστος','Μέση','λύσασθαι'],['Αόριστος','Παθητική','λυθῆναι'],
+['Παρακείμενος','Ενεργητική','λελυκέναι'],['Παρακείμενος','Μέση/παθητική','λελύσθαι'],
+['Συντελεσμένος μέλλοντας','Μέση/παθητική','λελύσεσθαι']].forEach(a=>inf('λύω',...a));
+// Μετοχές μέσης/παθητικής πρώτης και δεύτερης κλίσης: ονομαστική, γενική, δοτική, αιτιατική.
+function middlePartExact(v,t,voice,nom,gen,dat,acc,plNom,plGen,plDat,plAcc,fNom,fGen,fDat,fAcc,fplNom,fplGen,fplDat,fplAcc,nNom,nplNom){
+ [ [nom,gen,dat,acc],[plNom,plGen,plDat,plAcc] ].forEach((x,n)=>part(v,t,voice,0,n,x.join('|')));
+ [[fNom,fGen,fDat,fAcc],[fplNom,fplGen,fplDat,fplAcc]].forEach((x,n)=>part(v,t,voice,1,n,x.join('|')));
+ [[nNom,gen,dat,nNom],[nplNom,plGen,plDat,nplNom]].forEach((x,n)=>part(v,t,voice,2,n,x.join('|')));
+}
+function mp(v,t,voice,stem,mode){
+ // Κλίση των μετοχών -μενος: διαφορά τόνου ονομαστικής και πλάγιων πτώσεων.
+ const x=mode==='a'?'α':'ο', X=mode==='a'?'ά':'ό';
+ middlePartExact(v,t,voice,
+ stem+X+'μενος',stem+x+'μένου',stem+x+'μένῳ',stem+X+'μενον',
+ stem+X+'μενοι',stem+x+'μένων',stem+x+'μένοις',stem+X+'μενους',
+ stem+x+'μένη',stem+x+'μένης',stem+x+'μένῃ',stem+x+'μένην',
+ stem+X+'μεναι',stem+x+'μένων',stem+x+'μέναις',stem+x+'μένας',
+ stem+X+'μενον',stem+X+'μενα');
+}
+// Για τον παρακείμενο ο τόνος βρίσκεται στο -μέ-: λελυμένος, λελυμένη.
+function perfectMP(){middlePartExact('λύω','Παρακείμενος','Μέση/παθητική',
+ 'λελυμένος','λελυμένου','λελυμένῳ','λελυμένον','λελυμένοι','λελυμένων','λελυμένοις','λελυμένους',
+ 'λελυμένη','λελυμένης','λελυμένῃ','λελυμένην','λελυμέναι','λελυμένων','λελυμέναις','λελυμένας','λελυμένον','λελυμένα');}
+mp('λύω','Ενεστώτας','Μέση/παθητική','λυ','o');
+mp('λύω','Μέλλοντας','Μέση','λυσ','o');
+mp('λύω','Αόριστος','Μέση','λυσ','a');
+mp('λύω','Μέλλοντας','Παθητική','λυθησ','o');
+perfectMP();
+mp('λύω','Συντελεσμένος μέλλοντας','Μέση/παθητική','λελυσ','o');
+mp('εἰμί','Μέλλοντας','Μέση (μορφολογικά)','ἐσ','o');
+// Ενεργητικές μετοχές: πέντε πτώσεις × ενικός/πληθυντικός × τρία γένη.
+function activePart(v,t,voice,x){ for(let g=0;g<3;g++)for(let n=0;n<2;n++)part(v,t,voice,g,n,x[g][n].join('|')); }
+activePart('εἰμί','Ενεστώτας','Ενεργητική',[
+ [['ὤν','ὄντος','ὄντι','ὄντα'],['ὄντες','ὄντων','οὖσι','ὄντας']],
+ [['οὖσα','οὔσης','οὔσῃ','οὖσαν'],['οὖσαι','οὐσῶν','οὔσαις','οὔσας']],
+ [['ὄν','ὄντος','ὄντι','ὄν'],['ὄντα','ὄντων','οὖσι','ὄντα']]
+]);
+activePart('λύω','Ενεστώτας','Ενεργητική',[
+ [['λύων','λύοντος','λύοντι','λύοντα'],['λύοντες','λυόντων','λύουσι','λύοντας']],
+ [['λύουσα','λυούσης','λυούσῃ','λύουσαν'],['λύουσαι','λυουσῶν','λυούσαις','λυούσας']],
+ [['λῦον','λύοντος','λύοντι','λῦον'],['λύοντα','λυόντων','λύουσι','λύοντα']]
+]);
+activePart('λύω','Μέλλοντας','Ενεργητική',[
+ [['λύσων','λύσοντος','λύσοντι','λύσοντα'],['λύσοντες','λυσόντων','λύσουσι','λύσοντας']],
+ [['λύσουσα','λυσούσης','λυσούσῃ','λύσουσαν'],['λύσουσαι','λυσουσῶν','λυσούσαις','λυσούσας']],
+ [['λῦσον','λύσοντος','λύσοντι','λῦσον'],['λύσοντα','λυσόντων','λύσουσι','λύσοντα']]
+]);
+activePart('λύω','Αόριστος','Ενεργητική',[
+ [['λύσας','λύσαντος','λύσαντι','λύσαντα'],['λύσαντες','λυσάντων','λύσασι','λύσαντας']],
+ [['λύσασα','λυσάσης','λυσάσῃ','λύσασαν'],['λύσασαι','λυσασῶν','λυσάσαις','λυσάσας']],
+ [['λῦσαν','λύσαντος','λύσαντι','λῦσαν'],['λύσαντα','λυσάντων','λύσασι','λύσαντα']]
+]);
+activePart('λύω','Αόριστος','Παθητική',[
+ [['λυθείς','λυθέντος','λυθέντι','λυθέντα'],['λυθέντες','λυθέντων','λυθεῖσι','λυθέντας']],
+ [['λυθεῖσα','λυθείσης','λυθείσῃ','λυθεῖσαν'],['λυθεῖσαι','λυθεισῶν','λυθείσαις','λυθείσας']],
+ [['λυθέν','λυθέντος','λυθέντι','λυθέν'],['λυθέντα','λυθέντων','λυθεῖσι','λυθέντα']]
+]);
+activePart('λύω','Παρακείμενος','Ενεργητική',[
+ [['λελυκώς','λελυκότος','λελυκότι','λελυκότα'],['λελυκότες','λελυκότων','λελυκόσι','λελυκότας']],
+ [['λελυκυῖα','λελυκυίας','λελυκυίᾳ','λελυκυῖαν'],['λελυκυῖαι','λελυκυιῶν','λελυκυίαις','λελυκυίας']],
+ [['λελυκός','λελυκότος','λελυκότι','λελυκός'],['λελυκότα','λελυκότων','λελυκόσι','λελυκότα']]
+]);
+// Περιφραστικός παρακείμενος ενεργητικής (Smyth §§599, 691, 694)
+// και συντελεσμένος μέλλοντας ενεργητικής/μέσης-παθητικής (Smyth §§600–601).
+const nomPerfectActive={
+ 'Ενικός':{Αρσενικό:'λελυκὼς',Θηλυκό:'λελυκυῖα',Ουδέτερο:'λελυκὸς'},
+ 'Πληθυντικός':{Αρσενικό:'λελυκότες',Θηλυκό:'λελυκυῖαι',Ουδέτερο:'λελυκότα'}};
+const nomPerfectMP={
+ 'Ενικός':{Αρσενικό:'λελυμένος',Θηλυκό:'λελυμένη',Ουδέτερο:'λελυμένον'},
+ 'Πληθυντικός':{Αρσενικό:'λελυμένοι',Θηλυκό:'λελυμέναι',Ουδέτερο:'λελυμένα'}};
+const futureBe=['ἔσομαι','ἔσῃ','ἔσται','ἐσόμεθα','ἔσεσθε','ἔσονται'];
+for(let i=0;i<6;i++)for(const gender of GENDERS){
+ const number=(i<3)?'Ενικός':'Πληθυντικός';const base={verb:'λύω',person:persons[i][0],number:persons[i][1],gender,kind:'Προσωπικός τύπος'};
+ for(const [m,arr] of [['Υποτακτική',eiSub],['Ευκτική',eiOpt]]){
+  rows.push({...base,tense:'Παρακείμενος',voice:'Ενεργητική',mood:m,
+   form:nomPerfectActive[number][gender]+' '+arr[i],note:'Περιφραστικός παρακείμενος ενεργητικής: μετοχή + εἰμί.'});}
+ rows.push({...base,tense:'Συντελεσμένος μέλλοντας',voice:'Ενεργητική',mood:'Οριστική',
+  form:nomPerfectActive[number][gender]+' '+futureBe[i],note:'Περιφραστικός συντελεσμένος μέλλοντας ενεργητικής (Smyth §600).'});
+ rows.push({...base,tense:'Συντελεσμένος μέλλοντας',voice:'Μέση/παθητική',mood:'Οριστική',
+  form:nomPerfectMP[number][gender]+' '+futureBe[i],note:'Περιφραστικός συντελεσμένος μέλλοντας μέσης/παθητικής (Smyth §601).'});
+}
+
+// Στα διδακτικά φυλλάδια οι τύποι ἐγενόμην / γέγονα συμπληρώνουν σημασιολογικά το εἰμί.
+// ΓΡΑΜΜΑΤΙΚΑ ανήκουν στο γίγνομαι και ταξινομούνται ρητά χωριστά.
+add('γίγνομαι','Αόριστος','Μέση','Οριστική','ἐγενόμην|ἐγένου|ἐγένετο|ἐγενόμεθα|ἐγένεσθε|ἐγένοντο');
+add('γίγνομαι','Αόριστος','Μέση','Υποτακτική','γένωμαι|γένῃ|γένηται|γενώμεθα|γένησθε|γένωνται');
+add('γίγνομαι','Αόριστος','Μέση','Ευκτική','γενοίμην|γένοιο|γένοιτο|γενοίμεθα|γένοισθε|γένοιντο');
+add('γίγνομαι','Αόριστος','Μέση','Προστακτική','—|γενοῦ|γενέσθω|—|γένεσθε|γενέσθων/γενέσθωσαν');
+add('γίγνομαι','Παρακείμενος','Ενεργητική','Οριστική','γέγονα|γέγονας|γέγονε|γεγόναμεν|γεγόνατε|γεγόνασι/γεγόνασιν');
+add('γίγνομαι','Υπερσυντέλικος','Ενεργητική','Οριστική','ἐγεγόνειν|ἐγεγόνεις|ἐγεγόνει|ἐγεγόνεμεν|ἐγεγόνετε|ἐγεγόνεσαν');
+inf('γίγνομαι','Αόριστος','Μέση','γενέσθαι');
+inf('γίγνομαι','Παρακείμενος','Ενεργητική','γεγονέναι');
+mp('γίγνομαι','Αόριστος','Μέση','γεν','o');
+activePart('γίγνομαι','Παρακείμενος','Ενεργητική',[
+ [['γεγονώς','γεγονότος','γεγονότι','γεγονότα'],['γεγονότες','γεγονότων','γεγονόσι','γεγονότας']],
+ [['γεγονυῖα','γεγονυίας','γεγονυίᾳ','γεγονυῖαν'],['γεγονυῖαι','γεγονυιῶν','γεγονυίαις','γεγονυίας']],
+ [['γεγονός','γεγονότος','γεγονότι','γεγονός'],['γεγονότα','γεγονότων','γεγονόσι','γεγονότα']]
+]);
+for(let i=0;i<6;i++)for(const gender of GENDERS){
+ const number=i<3?'Ενικός':'Πληθυντικός';
+ const pp=number==='Ενικός'?{Αρσενικό:'γεγονὼς',Θηλυκό:'γεγονυῖα',Ουδέτερο:'γεγονὸς'}[gender]:{Αρσενικό:'γεγονότες',Θηλυκό:'γεγονυῖαι',Ουδέτερο:'γεγονότα'}[gender];
+ for(const [m,arr] of [['Υποτακτική',eiSub],['Ευκτική',eiOpt]])rows.push({verb:'γίγνομαι',tense:'Παρακείμενος',voice:'Ενεργητική',mood:m,person:persons[i][0],number:persons[i][1],gender,form:pp+' '+arr[i],kind:'Προσωπικός τύπος',note:'Περιφραστικός τύπος παρακειμένου γίγνομαι.'});
+ if(i===1||i===2||i===4||i===5)rows.push({verb:'γίγνομαι',tense:'Παρακείμενος',voice:'Ενεργητική',mood:'Προστακτική',person:persons[i][0],number:persons[i][1],gender,form:pp+' '+['','ἴσθι','ἔστω','','ἔστε','ἔστων'][i],kind:'Προσωπικός τύπος',note:'Περιφραστική προστακτική παρακειμένου γίγνομαι.'});
+}
+// Συμπληρωματική ενεργητική προστακτική παρακειμένου λύω: μόνο περιφραστικά (όχι τεχνητή συνθετική προστακτική).
+for(let i of [1,2,4,5])for(const gender of GENDERS){
+ const no=i<3?'Ενικός':'Πληθυντικός';
+ rows.push({verb:'λύω',tense:'Παρακείμενος',voice:'Ενεργητική',mood:'Προστακτική',person:persons[i][0],number:persons[i][1],gender,
+ form:nomPerfectActive[no][gender]+' '+['','ἴσθι','ἔστω','','ἔστε','ἔστων'][i],kind:'Προσωπικός τύπος',note:'Περιφραστική προστακτική ενεργητικού παρακειμένου.'});
+}
+// Παραλλαγές με κινητό ν προστίθενται ως εναλλακτικά παραδείγματα όταν υπάρχουν·
+// σημείωση: η ύπαρξη ίδιου τύπου σε πολλές αναλύσεις δεν δημιουργεί διπλή σωστή επιλογή.
+
+// Επιδιόρθωση παροξύτονων στη μετοχή -όμενος: η ελληνική ορθογραφία απαιτεί αιχμή στο -ό- σε ονομαστική,
+// ενώ στις πλάγιες πτώσεις τόνο στο -έ-: π.χ. λυόμενος / λυομένου. Παρακάτω ορθά 'ο' αντιστοιχεί στο ονομαστικό ο (λυόμενος).
+function norm(s){return s.normalize('NFC').trim();}rows.forEach(x=>{
+ x.form=norm(x.form);
+ // Τρία διδακτικά επίπεδα, όχι ισχυρισμός περί στατιστικής συχνότητας.
+ // 1: οριστική συνηθισμένων χρόνων · 2: λοιπές παραγωγικές μορφές · 3: σπάνιες/παραδειγματικές.
+ x.tier=2;
+ if(x.kind==='Προσωπικός τύπος'&&x.mood==='Οριστική'&&
+    ['Ενεστώτας','Παρατατικός','Μέλλοντας','Αόριστος','Παρακείμενος'].includes(x.tense))x.tier=1;
+ if(x.variant||x.tense==='Συντελεσμένος μέλλοντας'||
+    (x.mood==='Ευκτική'&&x.tense==='Μέλλοντας')||
+    (x.tense==='Παρακείμενος'&&['Ευκτική','Υποτακτική'].includes(x.mood))||
+    (x.tense==='Υπερσυντέλικος'&&x.voice==='Μέση/παθητική') ||
+    x.note?.includes('Περιφραστικός'))x.tier=3;
+ if(x.kind==='Μετοχή'&&x.gramCase==='Κλητική')x.tier=Math.max(x.tier,2);
+ x.source=(x.verb==='εἰμί')?'Smyth §768 / Μάντης (2021)':(x.verb==='γίγνομαι'?'Μάντης (2021) / φύλλα εἰμί / κλίση γίγνομαι':'Smyth §383 / Μάντης (2023) / φύλλο λύω');
+ if(x.verb==='γίγνομαι'&&x.tense==='Παρακείμενος'&&x.mood!=='Οριστική'&&x.mood!=='Μετοχή'&&x.mood!=='Απαρέμφατο')x.tier=3;
+});
+rows.forEach((x,i)=>x._id=i);
+const rarityLabel=t=>t===1?'Βασικό':t===2?'Μεσαίο':'Προχωρημένο';
+
+const $=id=>document.getElementById(id), ctx=$('game').getContext('2d');
+const canvas=$('game'), WIDTH=1000,HEIGHT=440,GROUND=354;
+const SEGMENT_SIZE=8,SAVE_KEY="super_filologos_v3_campaign";
+const state={mode:'menu',cfg:null,questions:[],qid:0,current:null,answered:false,history:[],right:0,score:0,lives:3,coins:new Set(),playMs:0,quizMs:0,clock:0,camera:0,hero:{x:65,y:GROUND-46,w:34,h:46,vx:0,vy:0,onGround:false},keys:{},gateX:[],enemies:[],coinPositions:[],finishX:0,invul:0,skyShift:0,segmentStart:0,stageEnd:0};
+const rnd=(a,b)=>Math.random()*(b-a)+a;
+function shuffle(a){for(let i=a.length-1;i>0;i--){let j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+function fmt(ms){let x=Math.max(0,Math.floor(ms/1000));return String(Math.floor(x/60)).padStart(2,'0')+':'+String(x%60).padStart(2,'0');}
+function label(x){let z=`${x.tense} · ${x.voice} · ${x.mood}`;
+ if(x.kind==='Προσωπικός τύπος')z+=` · ${x.person} πρόσωπο, ${x.number}`;
+ if(x.note&&x.gender)z+=` · ${x.gender.toLowerCase()} γένος (περιφραστικός)`;
+ if(x.kind==='Μετοχή')z+=` · ${x.gender}, ${x.number.toLowerCase()}, ${x.gramCase.toLowerCase()}`;
+ return z;}
+const selectFilters=['verbSel','tenseSel','moodSel','voiceSel','kindSel','personSel','numberSel','genderSel','caseSel'];
+function getCfg(){return {verb:$('verbSel').value,tense:$('tenseSel').value,mood:$('moodSel').value,voice:$('voiceSel').value,kind:$('kindSel').value,person:$('personSel').value,number:$('numberSel').value,gender:$('genderSel').value,gramCase:$('caseSel').value,tier:+$('tierSel').value,taskMode:$('questionModeSel').value,count:$('countSel').value==='all'?-1:+$('countSel').value,difficulty:$('difficultySel').value,chapter:$('chapterSel').value};}
+function matchRow(x,cfg,ignore){return x.tier<=cfg.tier&&
+  (ignore==='verb'||cfg.verb==='all3'||(cfg.verb==='both'&&x.verb!=='γίγνομαι')||x.verb===({eimi:'εἰμί',lyo:'λύω',ginomai:'γίγνομαι'}[cfg.verb]))&&
+  (ignore==='tense'||cfg.tense==='all'||x.tense===cfg.tense)&&
+  (ignore==='mood'||cfg.mood==='all'||x.mood===cfg.mood)&&
+  (ignore==='voice'||cfg.voice==='all'||x.voice===cfg.voice)&&
+  (ignore==='kind'||cfg.kind==='all'||x.kind===cfg.kind)&&
+  (ignore==='person'||cfg.person==='all'||x.person===cfg.person)&&
+  (ignore==='number'||cfg.number==='all'||x.number?.toLowerCase()===cfg.number)&&
+  (ignore==='gender'||cfg.gender==='all'||x.gender===cfg.gender)&&
+  (ignore==='gramCase'||cfg.gramCase==='all'||x.gramCase===cfg.gramCase);}
+function getPool(cfg){return rows.filter(x=>matchRow(x,cfg));}
+function wrongLabels(x,pool,cfg){const seen=new Set([label(x)]);let choices=[];
+ for(const y of shuffle(pool.filter(y=>y.verb===x.verb&&y.kind===x.kind)).concat(shuffle(rows.filter(y=>y.verb===x.verb&&y.kind===x.kind&&y.tier<=cfg.tier)))){
+  const s=label(y);if(!seen.has(s)){seen.add(s);choices.push(s);}if(choices.length>=3)break;}
+ if(choices.length<3)for(const y of shuffle(rows.filter(y=>y.verb!==x.verb&&y.kind===x.kind&&y.tier<=cfg.tier))){const s=label(y);if(!seen.has(s)){seen.add(s);choices.push(s);}if(choices.length>=3)break;}
+ return choices;}
+function wrongForms(x,pool,cfg){let seen=new Set([norm(x.form)]),choices=[];
+ let all=shuffle(pool.filter(y=>y!==x&&y.verb===x.verb&&y.kind===x.kind&&
+    (y.tense===x.tense||y.voice===x.voice)))
+   .concat(shuffle(rows.filter(y=>y.verb===x.verb&&y.kind===x.kind&&y.tier<=cfg.tier)))
+   .concat(shuffle(rows.filter(y=>y.verb!==x.verb&&y.kind===x.kind&&y.tier<=cfg.tier)));
+ for(const y of all){const s=norm(y.form);if(!seen.has(s)&&label(y)!==label(x)){seen.add(s);choices.push(y.form);}if(choices.length>=3)break;}
+ return choices;}
+function quizFor(x,pool,cfg){const allMatches=rows.filter(y=>y.verb===x.verb&&norm(y.form)===norm(x.form));
+ const analyses=new Set(allMatches.map(label));
+ const safeToAnalyse=analyses.size===1;
+ const chooseAnalyse=cfg.taskMode==='analyse'||(cfg.taskMode==='both'&&Math.random()<.39);
+ let task=(chooseAnalyse&&safeToAnalyse)?'analyse':'form';
+ if(cfg.taskMode==='analyse'&&!safeToAnalyse&&cfg.count!==-1)return null;
+ const main=task==='analyse'?x.form:x.verb+' — '+label(x);
+ const answer=task==='analyse'?label(x):x.form;
+ const prompt=task==='analyse'?'Ποια είναι η γραμματική αναγνώριση του τύπου;':
+    (x.kind==='Μετοχή'?'Επίλεξε τον ορθό τύπο της μετοχής:':x.kind==='Απαρέμφατο'?'Επίλεξε το ορθό απαρέμφατο:':'Επίλεξε τον ορθό ρηματικό τύπο:');
+ const distractors=(task==='analyse'?wrongLabels(x,pool,cfg):wrongForms(x,pool,cfg)).slice(0,3);
+ if(distractors.length<3)return null;
+ return {task,answer,choices:shuffle([answer,...distractors]),prompt,main,x};}
+function buildQuiz(cfg){let pool=getPool(cfg),known=new Set(),questions=[];
+ for(const x of shuffle([...pool])){
+  const q=quizFor(x,pool,cfg);if(!q)continue;
+  const id=cfg.count===-1?String(x._id):x.verb+'|'+label(x)+'|'+x.form;
+  if(!known.has(id)){known.add(id);questions.push(q);}}
+ // Κατά το δυνατόν μοιράζει τις ερωτήσεις στα δύο ρήματα.
+ if(cfg.verb==='both'&&cfg.count>0){let e=shuffle(questions.filter(q=>q.x.verb==='εἰμί')),
+    l=shuffle(questions.filter(q=>q.x.verb==='λύω')),mix=[];
+    while(e.length||l.length){if(e.length)mix.push(e.pop());if(l.length)mix.push(l.pop());}
+    questions=mix.slice(0,Math.max(cfg.count,Math.floor(cfg.count*1.25)));}
+ if(cfg.count===-1){
+  const verbOrd=['εἰμί','λύω','γίγνομαι'];const moodOrd=['Οριστική','Υποτακτική','Ευκτική','Προστακτική','Απαρέμφατο','Μετοχή'];
+  const voiceOrd=['Ενεργητική','Μέση (μορφολογικά)','Μέση/παθητική','Μέση','Παθητική'];
+  const noOrd=['ενικός','Ενικός','πληθυντικός','Πληθυντικός'];
+  const pp=['α΄','β΄','γ΄'];const caseOrd=['Ονομαστική','Γενική','Δοτική','Αιτιατική','Κλητική'];
+  const getIdx=(a,v)=>Math.max(0,a.indexOf(v));
+  questions.sort((a,b)=>{
+   const x=a.x,y=b.x;
+   const k=z=>[getIdx(verbOrd,z.verb),getIdx(tenses,z.tense),getIdx(voiceOrd,z.voice),getIdx(moodOrd,z.mood),getIdx(noOrd,z.number),getIdx(pp,z.person),getIdx(GENDERS,z.gender),getIdx(caseOrd,z.gramCase)];
+   const a0=k(x),b0=k(y);for(let i=0;i<a0.length;i++)if(a0[i]!==b0[i])return a0[i]-b0[i];return x._id-y._id;
+  });return questions;
+ }
+ return questions.slice(0,cfg.count);}
+const presets={
+ first:['both','Ενεστώτας','Οριστική','all','Προσωπικός τύπος',1],
+ eimi:['eimi','all','all','all','all',2],
+ present:['lyo','Ενεστώτας','all','all','all',2],
+ past:['both','Παρατατικός','Οριστική','all','Προσωπικός τύπος',1],
+ future:['both','Μέλλοντας','all','all','all',2],
+ aorist:['lyo','Αόριστος','all','all','all',2],
+ perfect:['lyo','Παρακείμενος','all','all','all',2],
+ pluperfect:['lyo','Υπερσυντέλικος','Οριστική','all','Προσωπικός τύπος',2],
+ optative:['both','all','Ευκτική','all','Προσωπικός τύπος',2],
+ imperative:['both','all','Προστακτική','all','Προσωπικός τύπος',2],
+ participles:['both','all','Μετοχή','all','Μετοχή',2],
+ advanced:['lyo','all','all','all','all',3],
+ supplement:['ginomai','all','all','all','all',2]};
+function applyPreset(k){const a=presets[k];if(!a)return;
+ const ids=['verbSel','tenseSel','moodSel','voiceSel','kindSel'];ids.forEach((id,i)=>$(id).value=a[i]);
+ $('tierSel').value=String(a[5]);$('personSel').value='all';$('numberSel').value='all';$('genderSel').value='all';$('caseSel').value='all';$('questionModeSel').value='both';updateSelections();}
+function updateSelections(){
+ let cfg=getCfg();
+ // Μη διαθέσιμες επιλογές απενεργοποιούνται, ποτέ δεν εμφανίζονται ως πραγματικοί τύποι.
+ for(const [id,key] of [['tenseSel','tense'],['moodSel','mood'],['voiceSel','voice'],['kindSel','kind'],['personSel','person'],['numberSel','number'],['genderSel','gender'],['caseSel','gramCase']]){
+  const sel=$(id);let relevant=rows.filter(x=>matchRow(x,cfg,key));
+  for(const opt of sel.options){if(opt.value==='all')continue;
+   opt.disabled=!relevant.some(x=>key==='number'?x.number?.toLowerCase()===opt.value:x[key]===opt.value);}
+  if(sel.selectedOptions[0]?.disabled){sel.value='all';cfg=getCfg();}
+ }
+ let pool=getPool(cfg);let eligible=pool.filter(x=>cfg.count===-1||cfg.taskMode!=='analyse'||new Set(rows.filter(y=>y.verb===x.verb&&norm(y.form)===norm(x.form)).map(label)).size===1);
+ $('filterStatus').classList.toggle('warn',eligible.length===0);
+ $('filterStatus').textContent=eligible.length?`${pool.length} διαθέσιμες μορφολογικές εγγραφές · ${eligible.length} υποψήφιοι τύποι για ασκήσεις. ${cfg.count===-1?'ΠΛΗΡΗΣ ΔΙΑΔΡΟΜΗ: κάθε εγγραφή θα εξεταστεί.':'Σύντομη εξάσκηση: επιλεγμένος αριθμός.'} ${cfg.tier===3?'Περιλαμβάνονται προχωρημένοι και σπάνιοι τύποι.':'Δεν περιλαμβάνονται σπάνιοι τύποι.'} Κανένας δυϊκός. (Ορισμένοι όμοιοι τύποι αντιστοιχούν σε διαφορετικές αναλύσεις.)`:'Δεν υπάρχουν τύποι με τα συγκεκριμένα φίλτρα. Δοκίμασε άλλη έγκλιση, φωνή ή επίπεδο.';
+ $('startBtn').disabled=eligible.length===0;
+ $('startBtn').title=eligible.length?'':'Δεν υπάρχει διαθέσιμο υλικό για την επιλογή αυτή';
+}
+$('chapterSel').addEventListener('change',()=>applyPreset($('chapterSel').value));
+for(const id of [...selectFilters,'tierSel','questionModeSel'])$(id).addEventListener('change',()=>{
+ $('chapterSel').value='custom';updateSelections();});
+$('chapterSel').value='custom';updateSelections();
+function setMode(m){state.mode=m;$('startLayer').hidden=m!=='menu';$('questionLayer').hidden=m!=='question';$('pauseLayer').hidden=m!=='pause';$('endLayer').hidden=m!=='end';}
+function getSegment(startIndex){
+ state.segmentStart=startIndex;state.stageEnd=Math.min(startIndex+SEGMENT_SIZE,state.questions.length);
+ const localCount=state.stageEnd-startIndex,step=530;
+ state.gateX=Array.from({length:localCount},(_,i)=>460+i*step);
+ state.finishX=460+localCount*step+250;
+ state.hero={x:65,y:GROUND-46,w:34,h:46,vx:0,vy:0,onGround:true};
+ state.camera=0;state.coins=new Set();state.enemies=[];state.coinPositions=[];state.invul=1000;
+ for(let i=0;i<localCount;i++){
+  const start=state.gateX[i],n=state.cfg.difficulty==='hard'?3:state.cfg.difficulty==='normal'?2:1;
+  for(let j=0;j<n;j++)state.enemies.push({x:start+145+j*108,w:30,h:31,y:GROUND-31,phase:rnd(0,6.28)});
+  for(let k=0;k<4;k++)state.coinPositions.push({x:start+42+k*97,y:GROUND-75-(k%2)*35,id:(i+startIndex)+'-'+k});
+ }
+ $('hint').textContent='Τμήμα '+(Math.floor(startIndex/SEGMENT_SIZE)+1)+' · Ερωτήσεις '+(startIndex+1)+'–'+state.stageEnd+' από '+state.questions.length;
+}
+function saveCampaign(){
+ if(!state.cfg||state.cfg.count!==-1||state.mode==='end')return;
+ try{localStorage.setItem(SAVE_KEY,JSON.stringify({version:3,cfg:state.cfg,ids:state.questions.map(q=>q.x._id),tasks:state.questions.map(q=>q.task),qid:state.qid,right:state.right,score:state.score,history:state.history,playMs:state.playMs,quizMs:state.quizMs}));}catch(e){console.warn('Η τοπική αποθήκευση δεν είναι διαθέσιμη.',e);}
+}
+function persisted(){try{const a=JSON.parse(localStorage.getItem(SAVE_KEY));return a&&a.version===3&&a.qid<a.ids.length?a:null;}catch(e){return null;}}
+function updateResume(){const a=persisted(),b=$('resumeSavedBtn');b.hidden=!a;if(a)b.textContent='↪ Συνέχεια: '+a.qid+'/'+a.ids.length+' ερωτήσεις';}
+function reset(){
+ const cfg=getCfg();const questions=buildQuiz(cfg);
+ if(!questions.length){setMode('menu');updateSelections();return;}
+ // Μία ερώτηση ανά εγγραφή στη λειτουργία πλήρους κάλυψης. Δεν επιτρέπεται παράλειψη.
+ if(cfg.count===-1&&questions.length!==getPool(cfg).length){
+  alert('Δεν μπορούν να κατασκευαστούν ερωτήσεις για όλους τους τύπους. Η πλήρης διαδρομή δεν ξεκινά.');return;
+ }
+ Object.assign(state,{cfg,questions,qid:0,current:null,answered:false,history:[],right:0,score:0,lives:3,playMs:0,quizMs:0,clock:0,invul:0});state.keys={};
+ getSegment(0);updateHud();$('courseLabel').textContent=(cfg.count===-1?'ΠΛΗΡΗΣ: ':'ΑΣΚΗΣΗ: ')+questions.length+' τύποι • '+rarityLabel(cfg.tier);
+ try{if(cfg.count===-1)localStorage.removeItem(SAVE_KEY);}catch(e){}
+ setMode('running');saveCampaign();
+}
+function resumeCampaign(){const a=persisted();if(!a)return;const byId=new Map(rows.map(x=>[x._id,x]));let pool=[];
+ for(const id of a.ids){const x=byId.get(id);if(!x){alert('Η αποθηκευμένη διαδρομή δεν είναι συμβατή με την τρέχουσα βάση.');return;}pool.push(x);}
+ const qs=pool.map((x,i)=>quizFor(x,pool,{...a.cfg,taskMode:a.tasks[i]==='analyse'?'analyse':'form'}));
+ if(qs.some(q=>!q)){alert('Αδύνατη η επαναφορά μιας ερώτησης.');return;}
+ Object.assign(state,{cfg:a.cfg,questions:qs,qid:a.qid,current:null,answered:false,history:a.history,right:a.right,score:a.score,lives:3,playMs:a.playMs,quizMs:a.quizMs,clock:0,invul:0});state.keys={};getSegment(Math.floor(a.qid/SEGMENT_SIZE)*SEGMENT_SIZE);updateHud();setMode('running');}
+function updateHud(){ $('hProgress').textContent=state.qid+'/'+(state.questions.length||getPool(getCfg()).length);$('hRight').textContent=state.right;$('hScore').textContent=state.score;$('hLives').textContent='♥ '.repeat(state.lives).trim()||'0';$('hPlay').textContent=fmt(state.playMs);$('hQuiz').textContent=fmt(state.quizMs);$('levelProgress').style.width=(state.questions.length?Math.max(0,Math.min(100,(state.qid+Math.min(1,state.hero.x/Math.max(1,state.finishX)))/state.questions.length*100)):0)+'%';}
+function showQuestion(){state.current=state.questions[state.qid];if(!state.current){finish();return;}state.answered=false;const q=state.current;setMode('question');$('qType').textContent=`ΠΥΛΗ ${state.qid+1} ΑΠΟ ${state.questions.length} • ${q.x.verb}`;$('qTitle').textContent=q.task==='analyse'?'Αναγνώριση τύπου':'Σχηματισμός τύπου';$('qPrompt').textContent=q.prompt;$('qGreek').textContent=q.main;$('qFeedback').textContent='';$('nextBtn').hidden=true;$('qCountLabel').textContent='Επίλεξε μία από τις τέσσερις απαντήσεις ή πάτησε 1–4.';const target=$('qOptions');target.replaceChildren();q.choices.forEach((opt,i)=>{const b=document.createElement('button');b.className='choice';b.textContent=(i+1)+'. '+opt;b.dataset.index=i;b.addEventListener('click',()=>answer(i));target.appendChild(b);});setTimeout(()=>target.querySelector('button')?.focus(),0);}
+function answer(i){if(state.mode!=='question'||state.answered)return;const q=state.current,userAnswer=q.choices[i],right=userAnswer===q.answer;state.answered=true;state.history.push({index:state.qid+1,question:q.prompt+' '+q.main,response:userAnswer,correct:q.answer,ok:right});if(right){state.right++;state.score+=100;}else{state.score=Math.max(0,state.score-15);} [...$('qOptions').children].forEach((b,k)=>{b.disabled=true;if(q.choices[k]===q.answer)b.classList.add('correct');if(k===i&&!right)b.classList.add('wrong');});$('qFeedback').textContent=right?'Σωστά! Η πύλη άνοιξε.':'Λανθασμένη επιλογή. Σωστή απάντηση: '+q.answer;$('nextBtn').hidden=false;$('qCountLabel').textContent=label(q.x)+' · '+rarityLabel(q.x.tier)+(q.x.variant?' (εναλλακτική μορφή)':'')+' · '+q.x.source;$('nextBtn').focus();updateHud();saveCampaign();}
+function next(){if(!state.answered)return;state.qid++;if(state.qid<state.questions.length&&state.qid>=state.stageEnd)getSegment(state.qid);else{const local=state.qid-1-state.segmentStart;state.hero.x=Math.max(state.hero.x,state.gateX[local]+82);state.hero.y=GROUND-state.hero.h;state.hero.vy=0;state.hero.onGround=true;state.invul=1100;}state.keys={};setMode('running');saveCampaign();}
+function finish(){setMode('end');$('endTitle').textContent='Ολοκλήρωσες την περιπέτεια!';$('endMessage').textContent='Ολοκλήρωσες '+state.qid+' από '+state.questions.length+' μορφολογικές εγγραφές. '+(state.cfg.count===-1?'Πλήρης κάλυψη της επιλεγμένης ύλης.':'Σύντομη εξάσκηση.');$('resCorrect').textContent=state.right+'/'+state.history.length;$('resScore').textContent=state.score;$('resPercent').textContent=(state.history.length?Math.round(state.right/state.history.length*100):0)+'%';$('resPlay').textContent=fmt(state.playMs);$('resQuiz').textContent=fmt(state.quizMs);$('resTotal').textContent=fmt(state.playMs+state.quizMs);try{if(state.cfg.count===-1)localStorage.removeItem(SAVE_KEY);}catch(e){}$('reviewSection').hidden=true;$('showAnswersBtn').textContent='Προβολή απαντήσεων';let body=$('reportRows');body.replaceChildren();for(const h of state.history){const tr=document.createElement('tr');for(let val of [h.index,h.question,h.response,h.correct,h.ok?'Σωστό':'Λάθος']){let td=document.createElement('td');td.textContent=val;tr.appendChild(td);}tr.lastChild.style.color=h.ok?'#89edbd':'#ffaca7';body.appendChild(tr);}updateHud();}
+function showMenu(){saveCampaign();state.keys={};setMode('menu');updateResume();$('startTitle').textContent='Έτοιμος για νέα περιπέτεια;';}
+function togglePause(){if(state.mode==='running'){saveCampaign();setMode('pause');state.keys={};}else if(state.mode==='pause')setMode('running');}
+$('startBtn').onclick=reset;$('resumeSavedBtn').onclick=resumeCampaign;$('restartBtn').onclick=showMenu;$('pauseBtn').onclick=togglePause;$('resumeBtn').onclick=()=>setMode('running');$('newFromPause').onclick=showMenu;$('helpBtn').onclick=()=>{if(state.mode==='running')setMode('pause');else if(state.mode==='menu'){$('coverage').hidden=false;$('coverage').textContent='Κίνηση με ← / → (ή A/D), άλμα με διάστημα / ↑. Στις ερωτήσεις πάτησε 1–4. Στην πύλη σταματά ο χρόνος της πίστας και μετρά ο χρόνος απάντησης.';}};
+$('againBtn').onclick=showMenu;$('nextBtn').onclick=next;$('showAnswersBtn').onclick=()=>{let el=$('reviewSection');el.hidden=!el.hidden;$('showAnswersBtn').textContent=el.hidden?'Προβολή απαντήσεων':'Απόκρυψη απαντήσεων';};
+$('morphBtn').onclick=()=>{const e=$('coverage');e.hidden=!e.hidden;e.innerHTML=`<p><b>εἰμί:</b> ενεστώτας (οριστική, υποτακτική, ευκτική, προστακτική), παρατατικός (μόνο οριστική), μέλλοντας με τύπους μέσης φωνής (οριστική, ευκτική), απαρέμφατα, μετοχές. <b>λύω:</b> παραγωγικοί χρόνοι, εγκλίσεις και φωνές όπου σχηματίζονται, απαρέμφατα, μετοχές με τρία γένη και πέντε πτώσεις στον ενικό και πληθυντικό.</p><p>Η κλητική αρσενικού ενικού των μετοχών σε -μενος λήγει σε -μενε (π.χ. λυόμενε), ενώ άλλες μετοχές συχνά έχουν την ίδια μορφή με την ονομαστική. Οι περιφραστικές μορφές του παρακειμένου και οι σπάνιες μορφές του συντελεσμένου μέλλοντα είναι μόνο για το προχωρημένο επίπεδο. Οι τύποι ἐγενόμην, γέγονα ανήκουν στο γίγνομαι, όχι μορφολογικά στο εἰμί. Ορισμένες προχωρημένες μορφές αποτελούν υποδειγματικούς γραμματικούς σχηματισμούς, όχι τεκμήριο συχνής χρήσης στην κλασική γραμματεία.</p><p>Πηγές: <a href="https://grammars.alpheios.net/smyth/xhtml/body.1_div1.2_div2.9.html" target="_blank" rel="noopener">Smyth §383</a>, <a href="https://grammars.alpheios.net/smyth/xhtml/body.1_div1.2_div2.10.html" target="_blank" rel="noopener">Smyth §768</a>, <a href="https://services.perseids.org/sg/body.1_div1.2_div2.4.html" target="_blank" rel="noopener">Smyth §305 (μετοχές)</a>. Ενσωματωμένες μορφές: ${rows.length}, χωρίς δυϊκό.</p>`;};
+
+let tablePage=0;
+function populateTableFilters(){
+ for(const [id,k] of [['tabVerb','verb'],['tabTense','tense'],['tabVoice','voice'],['tabMood','mood']]){
+  const sel=$(id);for(const value of [...new Set(rows.map(x=>x[k]))]){let el=document.createElement('option');el.value=value;el.textContent=value;sel.appendChild(el);}
+  sel.addEventListener('change',()=>{tablePage=0;renderParadigm();});
+ }
+}
+function renderParadigm(){
+ const filtered=rows.filter(x=>[['tabVerb','verb'],['tabTense','tense'],['tabVoice','voice'],['tabMood','mood']].every(([id,k])=>$(id).value==='all'||$(id).value===x[k]));
+ const pageSize=90,pageMax=Math.max(0,Math.ceil(filtered.length/pageSize)-1);tablePage=Math.min(tablePage,pageMax);
+ const shown=filtered.slice(tablePage*pageSize,(tablePage+1)*pageSize),tb=$('tableBody');tb.replaceChildren();
+ for(const x of shown){let tr=document.createElement('tr');let desc=x.kind==='Προσωπικός τύπος'?(x.person||'')+' · '+(x.number||'')+(x.gender?' · '+x.gender:''):(x.kind==='Μετοχή'?x.gender+' · '+x.number+' · '+x.gramCase:'—');
+  for(const v of [x.verb,x.tense,x.voice,x.mood,desc,x.form]){const td=document.createElement('td');td.textContent=v;tr.appendChild(td);}tb.appendChild(tr);}
+ $('tableStatus').textContent=filtered.length+' εγγραφές · Σελίδα '+(tablePage+1)+' από '+(pageMax+1)+' · '+shown.length+' εμφανίζονται.';
+ $('tablePrev').disabled=tablePage===0;$('tableNext').disabled=tablePage===pageMax;
+}
+$('paradigmBtn').onclick=()=>{$('paradigmLayer').hidden=false;renderParadigm();};
+$('tableClose').onclick=()=>$('paradigmLayer').hidden=true;
+$('tablePrev').onclick=()=>{tablePage=Math.max(0,tablePage-1);renderParadigm();};
+$('tableNext').onclick=()=>{tablePage++;renderParadigm();};
+populateTableFilters();
+$('exportBankBtn').onclick=()=>{const a=[['Ρήμα','Χρόνος','Φωνή','Έγκλιση / Τύπος','Πρόσωπο','Αριθμός','Γένος','Πτώση','Τύπος','Επίπεδο','Σημειώσεις','Πηγή'],...rows.map(x=>[x.verb,x.tense,x.voice,x.mood,x.person||'',x.number||'',x.gender||'',x.gramCase||'',x.form,rarityLabel(x.tier),x.note||'',x.source])];downloadCsv(a,'super-filologos-pliris-klisi-v3.csv');};
+function downloadCsv(a,name){const enc=s=>'"'+String(s).replaceAll('"','""')+'"';const csv='\ufeff'+a.map(r=>r.map(enc).join(';')).join('\r\n');const url=URL.createObjectURL(new Blob([csv],{type:'text/csv;charset=utf-8'}));const link=document.createElement('a');link.href=url;link.download=name;link.click();setTimeout(()=>URL.revokeObjectURL(url),1500);}
+$('csvBtn').onclick=()=>{const encode=s=>'"'+String(s).replaceAll('"','""')+'"';let a=[['Α/Α','Ερώτηση','Απάντηση παίκτη','Σωστή απάντηση','Ορθότητα'],...state.history.map(x=>[x.index,x.question,x.response,x.correct,x.ok?'Σωστό':'Λάθος'])];const csv='\ufeff'+a.map(r=>r.map(encode).join(';')).join('\r\n');const url=URL.createObjectURL(new Blob([csv],{type:'text/csv;charset=utf-8'}));const link=document.createElement('a');link.href=url;link.download='super-filologos-apotelesmata.csv';link.click();setTimeout(()=>URL.revokeObjectURL(url),1000);};
+function setKey(id,key){const b=$(id);function down(e){e.preventDefault();state.keys[key]=true;b.classList.add('pressed');try{b.setPointerCapture(e.pointerId);}catch(_){}}function up(e){e.preventDefault();state.keys[key]=false;b.classList.remove('pressed');}b.addEventListener('pointerdown',down);for(const t of ['pointerup','pointercancel','lostpointercapture'])b.addEventListener(t,up);}
+setKey('leftBtn','left');setKey('rightBtn','right');setKey('jumpBtn','jump');
+window.addEventListener('keydown',e=>{if(['ArrowLeft','ArrowRight','ArrowUp','Space','KeyA','KeyD','KeyW','KeyP','Digit1','Digit2','Digit3','Digit4'].includes(e.code)&&!['SELECT','INPUT'].includes(document.activeElement.tagName))e.preventDefault();if(['ArrowLeft','KeyA'].includes(e.code))state.keys.left=true;if(['ArrowRight','KeyD'].includes(e.code))state.keys.right=true;if(['Space','ArrowUp','KeyW'].includes(e.code))state.keys.jump=true;if(e.code==='KeyP'&& !e.repeat)togglePause();if(state.mode==='question'){let m=/^Digit([1-4])$/.exec(e.code);if(m)answer(Number(m[1])-1);if(e.code==='Enter'&&state.answered)next();}});
+window.addEventListener('keyup',e=>{if(['ArrowLeft','KeyA'].includes(e.code))state.keys.left=false;if(['ArrowRight','KeyD'].includes(e.code))state.keys.right=false;if(['Space','ArrowUp','KeyW'].includes(e.code))state.keys.jump=false;});window.addEventListener('blur',()=>{saveCampaign();state.keys={};if(state.mode==='running')setMode('pause');});
+// Canvas: οριζόντια πίστα με κύλιση, άλματα, εχθρούς, συλλεκτικά νομίσματα και χειρόγραφα-πύλες.
+function draw(t){const cam=state.camera;
+ const sky=ctx.createLinearGradient(0,0,0,HEIGHT);sky.addColorStop(0,'#63bee4');sky.addColorStop(.62,'#aee3de');sky.addColorStop(1,'#f7e6b3');ctx.fillStyle=sky;ctx.fillRect(0,0,WIDTH,HEIGHT);
+ ctx.fillStyle='#fff6c7';ctx.beginPath();ctx.arc(790-cam*.02%1100,76,35,0,Math.PI*2);ctx.fill();
+ for(let layer=0;layer<2;layer++){const s=layer===0?0.14:0.29;const y=layer===0?286:322;ctx.fillStyle=layer===0?'#87babb':'#4e98a2';ctx.beginPath();ctx.moveTo(0,HEIGHT);for(let x=-100;x<WIDTH+200;x+=8){let wx=x+cam*s;let yy=y+Math.sin(wx*.008)*30+Math.sin(wx*.021)*14;ctx.lineTo(x,yy);}ctx.lineTo(WIDTH,HEIGHT);ctx.closePath();ctx.fill();}
+ // Αναπαραστατικά κιονόκρανα στον ορίζοντα
+ for(let k=-1;k<7;k++){const x=k*270-(cam*.46%270);const y=GROUND-100;ctx.fillStyle='#e7dbb8';ctx.fillRect(x+14,y+25,12,85);ctx.fillRect(x+70,y+25,12,85);ctx.fillRect(x+9,y+20,80,10);ctx.fillRect(x+3,y+13,92,8);ctx.fillStyle='#acbba9';ctx.fillRect(x+14,y+28,3,82);ctx.fillRect(x+70,y+28,3,82);}
+ ctx.fillStyle='#936b42';ctx.fillRect(0,GROUND+14,WIDTH,HEIGHT-GROUND-14);ctx.fillStyle='#45896d';ctx.fillRect(0,GROUND,WIDTH,16);for(let i=0;i<WIDTH/38+2;i++){const x=i*38-(cam%38);ctx.fillStyle=i%3?'#418769':'#75a568';ctx.fillRect(x,GROUND+2,15,5);}
+ for(const co of state.coinPositions){const x=co.x-cam;if(x<-30||x>WIDTH+30||state.coins.has(co.id))continue;const yy=co.y+Math.sin(t/240+co.x*.01)*4;ctx.fillStyle='#ffcc4f';ctx.beginPath();ctx.ellipse(x,yy,10,13,0,0,Math.PI*2);ctx.fill();ctx.strokeStyle='#a96b22';ctx.lineWidth=2;ctx.stroke();ctx.fillStyle='#a66e2c';ctx.font='bold 15px Georgia';ctx.fillText('Φ',x-6,yy+5);}
+ for(let i=Math.max(0,state.qid-state.segmentStart);i<state.gateX.length;i++){const x=state.gateX[i]-cam;if(x<-80||x>WIDTH+80)continue;ctx.fillStyle='#304b6f';ctx.fillRect(x-21,GROUND-120,12,120);ctx.fillRect(x+24,GROUND-120,12,120);ctx.fillStyle='#d4b57f';ctx.fillRect(x-26,GROUND-126,67,12);ctx.fillStyle='#fcdb83';ctx.fillRect(x-17,GROUND-113,55,68);ctx.strokeStyle='#a1703b';ctx.strokeRect(x-17,GROUND-113,55,68);ctx.fillStyle='#a4763f';ctx.font='bold 23px Georgia';ctx.fillText('?',x+1,GROUND-70);ctx.fillStyle='#102a47';ctx.font='bold 12px system-ui';ctx.fillText('ΠΥΛΗ '+(state.segmentStart+i+1),x-21,GROUND-136);}
+ for(const mob of state.enemies){const x=mob.x-cam;if(x<-50||x>WIDTH+50)continue;const bounce=Math.sin(t/200+mob.phase)*3;ctx.fillStyle='#8a3da0';ctx.beginPath();ctx.ellipse(x+15,GROUND-16+bounce,20,16,0,0,Math.PI*2);ctx.fill();ctx.fillStyle='white';ctx.fillRect(x+6,GROUND-24+bounce,6,8);ctx.fillRect(x+19,GROUND-24+bounce,6,8);ctx.fillStyle='#261333';ctx.fillRect(x+9,GROUND-20+bounce,3,5);ctx.fillRect(x+22,GROUND-20+bounce,3,5);}
+ if(state.finishX){let x=state.finishX-cam;if(x<WIDTH+140){ctx.fillStyle='#d8ad54';ctx.fillRect(x-4,GROUND-183,8,183);ctx.fillStyle='#ffd970';ctx.beginPath();ctx.moveTo(x+4,GROUND-179);ctx.lineTo(x+92,GROUND-155);ctx.lineTo(x+4,GROUND-132);ctx.closePath();ctx.fill();ctx.fillStyle='#312735';ctx.font='bold 15px system-ui';ctx.fillText('ΤΕΡΜΑ',x+8,GROUND-152);}}
+ const h=state.hero, hx=h.x-cam,hy=h.y;if(!state.invul||Math.floor(t/90)%2===0){ctx.save();ctx.translate(hx,hy);ctx.fillStyle='#202d43';ctx.fillRect(4,35,11,12);ctx.fillRect(20,35,11,12);ctx.fillStyle='#e5c35e';ctx.fillRect(1,13,32,24);ctx.fillStyle='#214264';ctx.fillRect(1,30,32,8);ctx.fillStyle='#f0bb88';ctx.fillRect(4,0,26,19);ctx.fillStyle='#35253e';ctx.fillRect(3,-2,29,7);ctx.fillRect(3,0,5,12);ctx.fillStyle='#2c2637';ctx.fillRect(23,7,3,3);ctx.fillStyle='#f2f6e3';ctx.fillRect(29,17,15,17);ctx.strokeStyle='#5d3f38';ctx.strokeRect(29,17,15,17);ctx.fillStyle='#9f6748';ctx.fillRect(33,21,7,2);ctx.fillRect(33,26,7,2);ctx.restore();}
+ if(state.mode==='menu'){ctx.fillStyle='#081a2e99';ctx.fillRect(0,0,WIDTH,HEIGHT);ctx.textAlign='center';ctx.fillStyle='#fff3c4';ctx.font='bold 42px system-ui';ctx.fillText('SUPER ΦΙΛΟΛΟΓΟΣ',WIDTH/2,195);ctx.fillStyle='#f3f4e8';ctx.font='21px system-ui';ctx.fillText('Πλατφόρμες • Γραμματική • Περιπέτεια',WIDTH/2,236);ctx.textAlign='start';}
+}
+function tick(now){if(!state.clock)state.clock=now;let dt=Math.min(50,now-state.clock);state.clock=now;let t=now;if(state.mode==='running'){
+ state.playMs+=dt;state.invul=Math.max(0,state.invul-dt);const h=state.hero;const factor=dt/16.667;let accel=(state.keys.right?1:0)-(state.keys.left?1:0);h.vx=accel*(state.cfg?.difficulty==='hard'?5.2:4.5);h.x+=h.vx*factor;h.x=Math.max(15,Math.min(h.x,state.finishX+120));if(state.keys.jump&&h.onGround){h.vy=-12.1;h.onGround=false;}h.vy=Math.min(14,h.vy+.62*factor);h.y+=h.vy*factor;if(h.y>=GROUND-h.h){h.y=GROUND-h.h;h.vy=0;h.onGround=true;}
+ if(!state.invul){for(const mob of state.enemies){if(h.x+h.w>mob.x-10&&h.x<mob.x+mob.w+10&&h.y+h.h>mob.y+7&&h.y<mob.y+mob.h){if(h.vy>2&&h.y+h.h<mob.y+20){state.score+=20;h.vy=-8.3;state.invul=650;}else{state.lives=Math.max(0,state.lives-1);state.score=Math.max(0,state.score-20);state.invul=1500;h.vy=-7;h.x=Math.max(30,h.x-80);if(state.lives===0){state.lives=3;$('hint').textContent='Οι καρδιές ανανεώθηκαν — συνέχισε την προσπάθεια!';}}break;}}}
+ for(const co of state.coinPositions){if(!state.coins.has(co.id)&&Math.abs(h.x+15-co.x)<31&&Math.abs(h.y+18-co.y)<39){state.coins.add(co.id);state.score+=10;}}
+ const gateIndex=state.qid-state.segmentStart;if(gateIndex<state.gateX.length&&h.x>=state.gateX[gateIndex]-38){h.x=state.gateX[gateIndex]-38;h.vx=0;showQuestion();}if(h.x>=state.finishX&&state.qid===state.questions.length){finish();}state.camera=Math.max(0,h.x-240);updateHud();
+ }else if(state.mode==='question'){state.quizMs+=dt;updateHud();}draw(t);requestAnimationFrame(tick);}
+window.addEventListener('load',()=>{ // έλεγχος εγκυρότητας αρχικών δεδομένων
+ const invalid=rows.filter(x=>!x.form||!x.tense||!x.verb);if(invalid.length)console.warn('Ανεπαρκείς εγγραφές:',invalid.length);
+ $('coverage').dataset.count=String(rows.length);updateResume();updateHud();requestAnimationFrame(tick);
+});
+</script>
+</body></html>

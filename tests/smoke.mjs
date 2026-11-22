@@ -1,0 +1,41 @@
+import assert from 'node:assert/strict';
+import { readFileSync } from 'node:fs';
+import vm from 'node:vm';
+
+const html = readFileSync('index.html','utf8');
+const version = readFileSync('VERSION','utf8').trim();
+assert.equal(version,'3.2');
+assert.match(html, /v3\.2/);
+assert.doesNotMatch(html, / • χωρίς δυϊκό/);
+assert.match(html, /function difficultyBand\(x\)/);
+assert.match(html, /function selectProgressiveQuestions\(/);
+const matches = [...html.matchAll(/<script>([\s\S]*?)<\/script>/g)];
+assert.equal(matches.length,1,'Expected exactly one inline script');
+const js = matches[0][1];
+new vm.Script(js,{filename:'embedded-game.js'});
+const start = js.indexOf('const $=id=>');
+const quizStart = js.indexOf('function label(x){');
+const quizEnd = js.indexOf('const presets={',quizStart);
+assert.ok(start>0 && quizStart>start && quizEnd>quizStart);
+const shuffle = `function shuffle(a){for(let i=a.length-1;i>0;i--){let j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}`;
+const testCode = js.slice(0,start)+'\n'+shuffle+'\n'+js.slice(quizStart,quizEnd)+'\nreturn {rows,getPool,buildQuiz,difficultyBand};';
+const {rows,getPool,buildQuiz,difficultyBand} = new Function(testCode)();
+assert.equal(rows.length,956);
+assert.ok(rows.every(r=>r.number!=='δυϊκός'));
+const cfg={verb:'all3',tense:'all',mood:'all',voice:'all',kind:'all',person:'all',number:'all',gender:'all',gramCase:'all',tier:3,taskMode:'both',count:-1};
+assert.equal(getPool(cfg).length,956);
+function check(questions,count){
+ assert.equal(questions.length,count);
+ assert.equal(new Set(questions.map(q=>q.x._id)).size,count);
+ assert.ok(questions.every((q,i)=>i===0||difficultyBand(q.x)>=difficultyBand(questions[i-1].x)));
+ assert.ok(questions.every(q=>q.choices.length===4 && new Set(q.choices).size===4 && q.choices.includes(q.answer)));
+}
+const full=buildQuiz(cfg);check(full,956);
+for(const count of [12,16,24,32])check(buildQuiz({...cfg,count}),count);
+const short=buildQuiz({...cfg,count:12});
+assert.equal(short[0].x.tier,1);
+assert.equal(short.at(-1).x.tier,3);
+const first=full.map(q=>q.x._id).join(',');
+const second=buildQuiz(cfg).map(q=>q.x._id).join(',');
+assert.notEqual(first,second,'Two fresh plays should not have an identical full order');
+console.log('Passed: 956 entries; full coverage; progressive levels; 12/16/24/32 samples; distinct shuffles; valid answers.');

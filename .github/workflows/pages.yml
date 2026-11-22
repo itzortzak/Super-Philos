@@ -15,7 +15,7 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v4
 
-      - name: Verify game and morphology inventory
+      - name: Verify game inventory and version
         shell: bash
         run: |
           set -euo pipefail
@@ -24,29 +24,30 @@ jobs:
           import csv, re
           html = Path("index.html").read_text(encoding="utf-8")
           version = Path("VERSION").read_text(encoding="utf-8").strip()
-          assert version == "3.1.1", version
-          assert "<title>Super Φιλόλογος" in html and "v3.1.1" in html
-          assert "function drawLandscape" in html and "ensureFreshOpening" in html
-          assert "Αποκλείεται <b>εντελώς ο δυϊκός αριθμός</b>" not in html
+          assert version == "3.2", version
+          assert "<title>Super Φιλόλογος" in html and "v3.2" in html
+          assert "function drawLandscape" in html and "function difficultyBand" in html
+          assert " • χωρίς δυϊκό" not in html
           scripts = re.findall(r"<script>(.*?)</script>", html, re.S)
-          assert len(scripts) == 1, "Expected single inline JavaScript block"
+          assert len(scripts) == 1
           Path("/tmp/super-philos-game.js").write_text(scripts[0], encoding="utf-8")
           with Path("morphology_audit.csv").open(encoding="utf-8-sig", newline="") as f:
               entries = list(csv.DictReader(f, delimiter=";"))
           assert len(entries) == 956, len(entries)
           assert not any(r.get("number") == "δυϊκός" for r in entries)
-          print(f"Validated Super Φιλόλογος v{version} and {len(entries)} morphology entries")
+          print(f"Validated Super Φιλόλογος v{version} and {len(entries)} morphological entries.")
           PY
           node --check /tmp/super-philos-game.js
+          node tests/smoke.mjs
 
       - name: Package release
         shell: bash
         run: |
           set -euo pipefail
           version="$(cat VERSION)"
-          zip -9 "Super_Philos_v${version}_complete.zip" index.html README.md RELEASE_NOTES.md PHILOLOGICAL_AUDIT.md morphology_audit.csv VERSION
+          zip -9 "Super_Philos_v${version}_complete.zip" index.html README.md RELEASE_NOTES.md PHILOLOGICAL_AUDIT.md morphology_audit.csv VERSION tests/smoke.mjs
 
-      - name: Publish GitHub release and tag
+      - name: Publish GitHub Release and version tag
         shell: bash
         env:
           GH_TOKEN: ${{ github.token }}

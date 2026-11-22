@@ -24,8 +24,8 @@ jobs:
           import csv, re
           html = Path("index.html").read_text(encoding="utf-8")
           version = Path("VERSION").read_text(encoding="utf-8").strip()
-          assert version == "3.2", version
-          assert "<title>Super Φιλόλογος" in html and "v3.2" in html
+          assert re.fullmatch(r"[0-9]+\.[0-9]+(?:\.[0-9]+)?", version), version
+          assert "<title>Super Φιλόλογος" in html and f"v{version}" in html
           assert "function drawLandscape" in html and "function difficultyBand" in html
           assert " • χωρίς δυϊκό" not in html
           scripts = re.findall(r"<script>(.*?)</script>", html, re.S)
@@ -56,8 +56,7 @@ jobs:
           version="v$(cat VERSION)"
           archive="Super_Philos_${version}_complete.zip"
           if gh release view "$version" >/dev/null 2>&1; then
-            gh release upload "$version" "$archive" --clobber
-            gh release edit "$version" --title "Super Φιλόλογος $version" --notes-file RELEASE_NOTES.md --latest
+            echo "::notice::Release $version already exists; bump VERSION and update RELEASE_NOTES.md before publishing a new version."
           else
             gh release create "$version" "$archive" --target "$GITHUB_SHA" --title "Super Φιλόλογος $version" --notes-file RELEASE_NOTES.md --latest
           fi

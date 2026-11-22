@@ -42,7 +42,7 @@
 
 ## Έλεγχοι, δημοσίευση, εκδόσεις
 
-Το έργο είναι **αυτόνομη στατική ιστοσελίδα** (`index.html` με ενσωματωμένα CSS και JavaScript). Η δημοσίευση γίνεται από τον κλάδο **main**, κατάλογο **/(root)**, μέσω GitHub Pages. Το [workflow](.github/workflows/pages.yml) ελέγχει τη μορφολογική βάση και τη διαβάθμιση των ερωτήσεων, ελέγχει τη σύνταξη JavaScript και δημιουργεί αυτομάτως το πακέτο ZIP και το GitHub Release **v3.2**. Το GitHub Pages ενημερώνεται ανεξάρτητα από τη δημιουργία Release.
+Το έργο είναι **αυτόνομη στατική ιστοσελίδα** (`index.html` με ενσωματωμένα CSS και JavaScript). Η δημοσίευση γίνεται από τον κλάδο **main**, κατάλογο **/(root)**, μέσω GitHub Pages. Το [workflow](.github/workflows/pages.yml) ελέγχει τη μορφολογική βάση και τη διαβάθμιση των ερωτήσεων, ελέγχει τη σύνταξη JavaScript και συσκευάζει την έκδοση που δηλώνει το αρχείο `VERSION` (σήμερα **v3.2**). Δημιουργεί νέο GitHub Release μόνο αν το αντίστοιχο tag δεν υπάρχει ήδη, ώστε να μη μεταβάλλονται οι παλαιότερες δημοσιεύσεις. Για νέα έκδοση ενημέρωσε μαζί τα `VERSION`, `RELEASE_NOTES.md` και την ένδειξη έκδοσης στο `index.html`. Το GitHub Pages ενημερώνεται ανεξάρτητα από τη δημιουργία Release.
 
 Τα κυριότερα αρχεία είναι `index.html`, `morphology_audit.csv`, `PHILOLOGICAL_AUDIT.md`, `RELEASE_NOTES.md`, `VERSION`, `tests/smoke.mjs`, `.github/workflows/pages.yml`.
 

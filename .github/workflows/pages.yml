@@ -1,4 +1,4 @@
-name: Publish Super Φιλόλογος to GitHub Pages
+name: Validate and release Super Φιλόλογος
 
 on:
   push:
@@ -6,37 +6,57 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
-  pages: write
-  id-token: write
-
-concurrency:
-  group: github-pages
-  cancel-in-progress: true
+  contents: write
 
 jobs:
-  deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+  validate-and-release:
     runs-on: ubuntu-latest
     steps:
-      - name: Check out Super Φιλόλογος
+      - name: Check out repository
         uses: actions/checkout@v4
 
-      - name: Confirm game entry point
-        run: test -s index.html && grep -q 'SUPER ΦΙΛΟΛΟΓΟΣ' index.html
+      - name: Verify game and morphology inventory
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+          import csv, re
+          html = Path("index.html").read_text(encoding="utf-8")
+          version = Path("VERSION").read_text(encoding="utf-8").strip()
+          assert version == "3.1.1", version
+          assert "<title>Super Φιλόλογος" in html and "v3.1.1" in html
+          assert "function drawLandscape" in html and "ensureFreshOpening" in html
+          assert "Αποκλείεται <b>εντελώς ο δυϊκός αριθμός</b>" not in html
+          scripts = re.findall(r"<script>(.*?)</script>", html, re.S)
+          assert len(scripts) == 1, "Expected single inline JavaScript block"
+          Path("/tmp/super-philos-game.js").write_text(scripts[0], encoding="utf-8")
+          with Path("morphology_audit.csv").open(encoding="utf-8-sig", newline="") as f:
+              entries = list(csv.DictReader(f, delimiter=";"))
+          assert len(entries) == 956, len(entries)
+          assert not any(r.get("number") == "δυϊκός" for r in entries)
+          print(f"Validated Super Φιλόλογος v{version} and {len(entries)} morphology entries")
+          PY
+          node --check /tmp/super-philos-game.js
 
-      - name: Configure and enable GitHub Pages
-        uses: actions/configure-pages@v5
-        with:
-          enablement: true
+      - name: Package release
+        shell: bash
+        run: |
+          set -euo pipefail
+          version="$(cat VERSION)"
+          zip -9 "Super_Philos_v${version}_complete.zip" index.html README.md RELEASE_NOTES.md PHILOLOGICAL_AUDIT.md morphology_audit.csv VERSION
 
-      - name: Upload static site
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: .
-
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+      - name: Publish GitHub release and tag
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          version="v$(cat VERSION)"
+          archive="Super_Philos_${version}_complete.zip"
+          if gh release view "$version" >/dev/null 2>&1; then
+            gh release upload "$version" "$archive" --clobber
+            gh release edit "$version" --title "Super Φιλόλογος $version" --notes-file RELEASE_NOTES.md --latest
+          else
+            gh release create "$version" "$archive" --target "$GITHUB_SHA" --title "Super Φιλόλογος $version" --notes-file RELEASE_NOTES.md --latest
+          fi

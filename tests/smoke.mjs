@@ -14,7 +14,7 @@ assert.equal(matches.length,1,'Expected exactly one inline script');
 const js = matches[0][1];
 new vm.Script(js,{filename:'embedded-game.js'});
 const start = js.indexOf('const $=id=>');
-const quizStart = js.indexOf('function label(x){');
+const quizStart = js.indexOf('// Πλήρεις γραμματικές');
 const quizEnd = js.indexOf('const presets={',quizStart);
 assert.ok(start>0 && quizStart>start && quizEnd>quizStart);
 const shuffle = `function shuffle(a){for(let i=a.length-1;i>0;i--){let j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}`;

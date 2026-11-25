@@ -40,6 +40,7 @@ jobs:
           node --check /tmp/super-philos-game.js
           node tests/smoke.mjs
           node tests/grammar-description.mjs
+          node tests/lives.mjs
           node tests/physics.mjs
 
       - name: Package release
@@ -47,7 +48,7 @@ jobs:
         run: |
           set -euo pipefail
           version="$(cat VERSION)"
-          zip -9 "Super_Philos_v${version}_complete.zip" index.html README.md RELEASE_NOTES.md PHILOLOGICAL_AUDIT.md morphology_audit.csv VERSION tests/smoke.mjs tests/physics.mjs tests/grammar-description.mjs
+          zip -9 "Super_Philos_v${version}_complete.zip" index.html README.md RELEASE_NOTES.md PHILOLOGICAL_AUDIT.md morphology_audit.csv VERSION tests/smoke.mjs tests/physics.mjs tests/grammar-description.mjs tests/lives.mjs
 
       - name: Publish GitHub Release and version tag
         shell: bash

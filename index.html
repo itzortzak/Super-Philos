@@ -2,7 +2,7 @@
 <html lang="el">
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>Super Φιλόλογος — εἰμί &amp; λύω | v3.4</title>
+<title>Super Φιλόλογος — εἰμί &amp; λύω | v3.5</title>
 <style>
 :root{color-scheme:dark;--bg:#071524;--panel:#0e253b;--panel2:#142f47;--ink:#f7f5e9;--muted:#aec0cd;--gold:#ffd166;--mint:#65e5bb;--red:#ff817e;--line:#35516a}
 *{box-sizing:border-box}html,body{height:100%;margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,'Segoe UI',sans-serif}button,select,input{font:inherit}button{cursor:pointer}button:focus-visible,select:focus-visible{outline:3px solid var(--mint);outline-offset:2px}
@@ -30,15 +30,15 @@
 </head>
 <body>
 <div class="shell">
-  <header class="header"><div class="brand"><div class="logo" aria-hidden="true">Φ</div><div><h1>SUPER ΦΙΛΟΛΟΓΟΣ</h1><small>Το ταξίδι των ρημάτων • εἰμί &amp; λύω • v3.4</small></div></div><div class="headtools"><button id="pauseBtn" class="btn ghost">⏸ Παύση</button><button id="restartBtn" class="btn">↻ Νέο παιχνίδι</button><button id="helpBtn" class="btn ghost">? Οδηγίες</button></div></header>
-  <div class="hud" aria-live="polite"><div class="stat"><span>Ερωτήσεις</span><strong id="hProgress">0/0</strong></div><div class="stat"><span>Σωστές</span><strong id="hRight">0</strong></div><div class="stat"><span>Βαθμοί</span><strong id="hScore">0</strong></div><div class="stat"><span>Καρδιές</span><strong id="hLives">♥ ♥ ♥</strong></div><div class="stat"><span>Χρόνος πίστας</span><strong id="hPlay">00:00</strong></div><div class="stat"><span>Χρόνος ερωτήσεων</span><strong id="hQuiz">00:00</strong></div></div>
+  <header class="header"><div class="brand"><div class="logo" aria-hidden="true">Φ</div><div><h1>SUPER ΦΙΛΟΛΟΓΟΣ</h1><small>Το ταξίδι των ρημάτων • εἰμί &amp; λύω • v3.5</small></div></div><div class="headtools"><button id="pauseBtn" class="btn ghost">⏸ Παύση</button><button id="restartBtn" class="btn">↻ Νέο παιχνίδι</button><button id="helpBtn" class="btn ghost">? Οδηγίες</button></div></header>
+  <div class="hud" aria-live="polite"><div class="stat"><span>Ερωτήσεις</span><strong id="hProgress">0/0</strong></div><div class="stat"><span>Σωστές</span><strong id="hRight">0</strong></div><div class="stat"><span>Βαθμοί</span><strong id="hScore">0</strong></div><div class="stat"><span>Ζωές</span><strong id="hLives">♥ 7/7</strong></div><div class="stat"><span>Χρόνος πίστας</span><strong id="hPlay">00:00</strong></div><div class="stat"><span>Χρόνος ερωτήσεων</span><strong id="hQuiz">00:00</strong></div></div>
   <div class="gamebox"><canvas id="game" width="1000" height="440" aria-label="Πίστα πλατφόρμας. Με τα βελάκια κινείστε και με διάστημα πηδάτε. Ερωτήσεις στις πύλες."></canvas><div class="gamehint" id="hint">Δύο διαδρομές · Κενά στο έδαφος · Πύλες άλματος</div></div>
   <div class="progresswrap" aria-label="Πρόοδος πίστας"><div class="progress" id="levelProgress"></div></div>
   <div class="controls"><div class="touchpad" aria-label="Κουμπιά χειρισμού"><button id="leftBtn" class="key" aria-label="Αριστερά">◀</button><button id="rightBtn" class="key" aria-label="Δεξιά">▶</button><button id="jumpBtn" class="key" aria-label="Άλμα">↑</button></div><div class="tip">Πλήκτρα: ← → ή A/D • άλμα: διάστημα / ↑ • απαντήσεις: 1–4 • P: παύση</div><span id="courseLabel" class="pill">Πλήρης μορφολογική διαδρομή</span></div>
   <footer class="details"><span>Μορφολογία αττικής διαλέκτου • αποθήκευση τοπικά (δεν αποστέλλονται δεδομένα)</span><span>Βάση: <a href="https://services.perseids.org/sg/body.1_div1.2_div2.9.html" target="_blank" rel="noopener">Smyth, λύω §383</a> · <a href="https://services.perseids.org/sg/body.1_div1.2_div2.10.html" target="_blank" rel="noopener">Smyth, εἰμί §768</a> · <a href="https://latistor.blogspot.com/2023/07/blog-post_42.html" target="_blank" rel="noopener">αναλυτική κλίση λύω</a> · <a href="https://latistor.blogspot.com/2021/01/blog-post_29.html" target="_blank" rel="noopener">εἰμί / γίγνομαι</a></span></footer>
 </div>
 <div class="overlay" id="startLayer"><div class="dialog wide">
-<span class="ribbon">ΕΚΠΑΙΔΕΥΤΙΚΟ ΠΑΙΧΝΙΔΙ ΠΛΑΤΦΟΡΜΑΣ • v3.4</span>
+<span class="ribbon">ΕΚΠΑΙΔΕΥΤΙΚΟ ΠΑΙΧΝΙΔΙ ΠΛΑΤΦΟΡΜΑΣ • v3.5</span>
 <h2 id="startTitle">Super Φιλόλογος — Οι πύλες της γραμματικής</h2>
 <p>Πήδηξε πάνω από χάσματα, χρησιμοποίησε υπερυψωμένες διαδρομές και άνοιξε πύλες με αναγνώριση και σχηματισμό των διαθέσιμων προσωπικών τύπων, απαρεμφάτων και πτώσεων μετοχών του <b>εἰμί</b> και του <b>λύω</b>. Οι συμπληρωματικοί χρόνοι του <b>γίγνομαι</b> παρέχονται χωριστά. Επίλεξε <b>«ΟΛΟΙ οι τύποι»</b> για πλήρη κάλυψη χωρίς παράλειψη· η πρόοδος αποθηκεύεται στον υπολογιστή.</p>
 <div class="group-title">1. ΘΕΜΑΤΙΚΗ ΠΙΣΤΑ</div>
@@ -86,7 +86,7 @@
 <div class="actions"><button class="btn" id="tablePrev">← Προηγούμενα</button><button class="btn" id="tableNext">Επόμενα →</button><button class="btn primary" id="tableClose">Κλείσιμο</button></div>
 </div></div>
 <div class="overlay" id="pauseLayer" hidden><div class="dialog"><h2>⏸ Παύση</h2><p>Η χρονομέτρηση και η πίστα έχουν σταματήσει. Σε κάθε νέα παρτίδα η σειρά ερωτήσεων και τα τοπία αλλάζουν.</p><div class="actions"><button class="btn primary" id="resumeBtn">Συνέχεια</button><button class="btn" id="newFromPause">Νέο παιχνίδι</button></div></div></div>
-<div class="overlay" id="endLayer" hidden><div class="dialog wide"><span class="ribbon">ΤΕΛΟΣ ΠΕΡΙΠΕΤΕΙΑΣ</span><h2 id="endTitle">Ολοκλήρωσες την πίστα!</h2><p class="banner" id="endMessage"></p><div class="results"><div class="resultnum"><b id="resCorrect">0/0</b><small>Σωστές απαντήσεις</small></div><div class="resultnum"><b id="resScore">0</b><small>Βαθμοί</small></div><div class="resultnum"><b id="resPercent">0%</b><small>Επιτυχία</small></div><div class="resultnum"><b id="resPlay">00:00</b><small>Χρόνος πίστας</small></div><div class="resultnum"><b id="resQuiz">00:00</b><small>Χρόνος ερωτήσεων</small></div><div class="resultnum"><b id="resTotal">00:00</b><small>Συνολικός χρόνος</small></div></div><div class="actions"><button class="btn primary" id="againBtn">↻ Παίξε ξανά</button><button class="btn" id="showAnswersBtn">Προβολή απαντήσεων</button><button class="btn ghost" id="csvBtn">Εξαγωγή αποτελεσμάτων CSV</button></div><section id="reviewSection" hidden><h3>Αναλυτική ανατροφοδότηση</h3><div style="overflow-x:auto"><table class="report"><thead><tr><th>#</th><th>Ερώτηση</th><th>Απάντηση παίκτη</th><th>Σωστή απάντηση</th><th>Αποτέλεσμα</th></tr></thead><tbody id="reportRows"></tbody></table></div></section></div></div>
+<div class="overlay" id="endLayer" hidden><div class="dialog wide"><span class="ribbon" id="endRibbon">ΤΕΛΟΣ ΠΕΡΙΠΕΤΕΙΑΣ</span><h2 id="endTitle">Ολοκλήρωσες την πίστα!</h2><p class="banner" id="endMessage"></p><div class="results"><div class="resultnum"><b id="resCorrect">0/0</b><small>Σωστές απαντήσεις</small></div><div class="resultnum"><b id="resScore">0</b><small>Βαθμοί</small></div><div class="resultnum"><b id="resPercent">0%</b><small>Επιτυχία</small></div><div class="resultnum"><b id="resGates">0/0</b><small>Πύλες που ολοκληρώθηκαν</small></div><div class="resultnum"><b id="resLives">7/7</b><small>Ζωές που απέμειναν</small></div><div class="resultnum"><b id="resEnemyHits">0</b><small>Συγκρούσεις με εχθρούς</small></div><div class="resultnum"><b id="resFalls">0</b><small>Πτώσεις σε χάσματα</small></div><div class="resultnum"><b id="resPlay">00:00</b><small>Χρόνος πίστας</small></div><div class="resultnum"><b id="resQuiz">00:00</b><small>Χρόνος ερωτήσεων</small></div><div class="resultnum"><b id="resTotal">00:00</b><small>Συνολικός χρόνος</small></div></div><div class="actions"><button class="btn primary" id="againBtn">↻ Αρχή από την αρχή</button><button class="btn" id="endMenuBtn">Ρυθμίσεις παιχνιδιού</button><button class="btn" id="showAnswersBtn">Προβολή απαντήσεων</button><button class="btn ghost" id="csvBtn">Εξαγωγή αποτελεσμάτων CSV</button></div><section id="reviewSection" hidden><h3>Αναλυτική ανατροφοδότηση</h3><div style="overflow-x:auto"><table class="report"><thead><tr><th>#</th><th>Ερώτηση</th><th>Απάντηση παίκτη</th><th>Σωστή απάντηση</th><th>Αποτέλεσμα</th></tr></thead><tbody id="reportRows"></tbody></table></div></section></div></div>
 <script>
 'use strict';
 // Τα προσωπικά παραδείγματα βασίζονται στη γραμματική Smyth §§ 383, 768.
@@ -299,6 +299,7 @@ const rarityLabel=t=>t===1?'Βασικό':t===2?'Μεσαίο':'Προχωρημ
 const $=id=>document.getElementById(id), ctx=$('game').getContext('2d');
 const canvas=$('game'), WIDTH=1000,HEIGHT=440,GROUND=354;
 const UPPER_RISE=98,SEGMENT_STEP=820,GAP_WIDTH=114;
+const MAX_LIVES=7;
 const SEGMENT_SIZE=8,SAVE_KEY="super_filologos_v3_campaign",FIRST_KEY="super_filologos_v31_previous_first";
 const SCENES=[
  {name:'Ελαιώνας',kind:'meadow',sky1:'#66b7d9',sky2:'#d8efd6',far:'#86b7a6',near:'#549a81',land:'#966d48',grass:'#71a86f',stone:'#e3d6b6',light:'#fff1a5'},
@@ -333,7 +334,7 @@ function updateRegionLabel(){
  const scene=currentScene();
  $('hint').textContent=`${scene.name} · περιοχή ${Math.floor(state.qid/4)+1} · πύλη ${Math.min(state.qid+1,state.questions.length)}/${state.questions.length}`;
 }
-const state={mode:'menu',cfg:null,questions:[],qid:0,current:null,answered:false,history:[],right:0,score:0,lives:3,coins:new Set(),playMs:0,quizMs:0,clock:0,camera:0,hero:{x:65,y:GROUND-46,w:34,h:46,vx:0,vy:0,onGround:false},keys:{},gateX:[],enemies:[],coinPositions:[],gates:[],platforms:[],gaps:[],finishX:0,invul:0,skyShift:0,segmentStart:0,stageEnd:0,worldSeed:0};
+const state={mode:'menu',cfg:null,questions:[],qid:0,current:null,answered:false,history:[],right:0,score:0,lives:MAX_LIVES,enemyHits:0,falls:0,coins:new Set(),playMs:0,quizMs:0,clock:0,camera:0,hero:{x:65,y:GROUND-46,w:34,h:46,vx:0,vy:0,onGround:false},keys:{},gateX:[],enemies:[],coinPositions:[],gates:[],platforms:[],gaps:[],finishX:0,invul:0,skyShift:0,segmentStart:0,stageEnd:0,worldSeed:0};
 const rnd=(a,b)=>Math.random()*(b-a)+a;
 function shuffle(a){for(let i=a.length-1;i>0;i--){let j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
 function fmt(ms){let x=Math.max(0,Math.floor(ms/1000));return String(Math.floor(x/60)).padStart(2,'0')+':'+String(x%60).padStart(2,'0');}
@@ -542,20 +543,30 @@ function nearestSafeBefore(x){
  if(target && safe>target.x-30)safe=Math.max(65,target.x-95);
  return Math.max(65,safe);
 }
-function loseLife(reason,x){
- state.lives--;state.score=Math.max(0,state.score-20);
+function loseLife(reason,x,cause){
+ // Κάθε σύγκρουση ή πτώση αφαιρεί μία ζωή. Στο μηδέν η παρτίδα τερματίζεται.
+ if(state.mode!=='running'||state.lives<=0)return;
+ state.lives=Math.max(0,state.lives-1);
+ if(cause==='fall')state.falls++;else state.enemyHits++;
+ state.score=Math.max(0,state.score-20);
+ state.keys={};
+ if(state.lives===0){
+  $('hint').textContent='Τέλος παιχνιδιού';
+  gameOver(reason);
+  return;
+ }
  const h=state.hero;
  h.x=nearestSafeBefore(x);h.y=GROUND-h.h;h.vy=0;h.vx=0;h.onGround=true;
- state.invul=1600;state.keys={};
- if(state.lives<=0){state.lives=3;$('hint').textContent='Νέα προσπάθεια • '+reason;}
- else $('hint').textContent=reason+' · Καρδιές: '+state.lives;
+ state.invul=1600;
+ $('hint').textContent=reason+' · Ζωές: '+state.lives+'/'+MAX_LIVES;
  updateHud();
+ saveCampaign();
 }
 function saveCampaign(){
  if(!state.cfg||state.cfg.count!==-1||state.mode==='end')return;
- try{localStorage.setItem(SAVE_KEY,JSON.stringify({version:3,cfg:state.cfg,ids:state.questions.map(q=>q.x._id),tasks:state.questions.map(q=>q.task),qid:state.qid,right:state.right,score:state.score,history:state.history,playMs:state.playMs,quizMs:state.quizMs,worldSeed:state.worldSeed}));}catch(e){console.warn('Η τοπική αποθήκευση δεν είναι διαθέσιμη.',e);}
+ try{localStorage.setItem(SAVE_KEY,JSON.stringify({version:3,cfg:state.cfg,ids:state.questions.map(q=>q.x._id),tasks:state.questions.map(q=>q.task),qid:state.qid,right:state.right,score:state.score,history:state.history,playMs:state.playMs,quizMs:state.quizMs,worldSeed:state.worldSeed,lives:state.lives,enemyHits:state.enemyHits,falls:state.falls}));}catch(e){console.warn('Η τοπική αποθήκευση δεν είναι διαθέσιμη.',e);}
 }
-function persisted(){try{const a=JSON.parse(localStorage.getItem(SAVE_KEY));return a&&a.version===3&&a.qid<a.ids.length?a:null;}catch(e){return null;}}
+function persisted(){try{const a=JSON.parse(localStorage.getItem(SAVE_KEY));return a&&a.version===3&&Array.isArray(a.ids)&&a.qid<a.ids.length&&(a.lives===undefined||a.lives>0)?a:null;}catch(e){return null;}}
 function updateResume(){const a=persisted(),b=$('resumeSavedBtn');b.hidden=!a;if(a)b.textContent='↪ Συνέχεια: '+a.qid+'/'+a.ids.length+' ερωτήσεις';}
 function reset(){
  const cfg=getCfg();const questions=buildQuiz(cfg);ensureFreshOpening(questions);
@@ -564,7 +575,7 @@ function reset(){
  if(cfg.count===-1&&questions.length!==getPool(cfg).length){
   alert('Δεν μπορούν να κατασκευαστούν ερωτήσεις για όλους τους τύπους. Η πλήρης διαδρομή δεν ξεκινά.');return;
  }
- Object.assign(state,{cfg,questions,qid:0,current:null,answered:false,history:[],right:0,score:0,lives:3,playMs:0,quizMs:0,clock:0,invul:0,worldSeed:Math.floor(Math.random()*SCENES.length)});state.keys={};
+ Object.assign(state,{cfg,questions,qid:0,current:null,answered:false,history:[],right:0,score:0,lives:MAX_LIVES,enemyHits:0,falls:0,playMs:0,quizMs:0,clock:0,invul:0,worldSeed:Math.floor(Math.random()*SCENES.length)});state.keys={};
  getSegment(0);updateHud();$('courseLabel').textContent=(cfg.count===-1?'ΠΛΗΡΗΣ: ':'ΑΣΚΗΣΗ: ')+questions.length+' τύποι • αύξουσα δυσκολία έως '+rarityLabel(cfg.tier);
  try{if(cfg.count===-1)localStorage.removeItem(SAVE_KEY);}catch(e){}
  setMode('running');saveCampaign();
@@ -573,8 +584,8 @@ function resumeCampaign(){const a=persisted();if(!a)return;const byId=new Map(ro
  for(const id of a.ids){const x=byId.get(id);if(!x){alert('Η αποθηκευμένη διαδρομή δεν είναι συμβατή με την τρέχουσα βάση.');return;}pool.push(x);}
  const qs=pool.map((x,i)=>quizFor(x,pool,{...a.cfg,taskMode:a.tasks[i]==='analyse'?'analyse':'form'}));
  if(qs.some(q=>!q)){alert('Αδύνατη η επαναφορά μιας ερώτησης.');return;}
- Object.assign(state,{cfg:a.cfg,questions:qs,qid:a.qid,current:null,answered:false,history:a.history,right:a.right,score:a.score,lives:3,playMs:a.playMs,quizMs:a.quizMs,clock:0,invul:0,worldSeed:Number.isInteger(a.worldSeed)?a.worldSeed:0});state.keys={};getSegment(Math.floor(a.qid/SEGMENT_SIZE)*SEGMENT_SIZE);updateHud();setMode('running');}
-function updateHud(){ $('hProgress').textContent=state.qid+'/'+(state.questions.length||getPool(getCfg()).length);$('hRight').textContent=state.right;$('hScore').textContent=state.score;$('hLives').textContent='♥ '.repeat(state.lives).trim()||'0';$('hPlay').textContent=fmt(state.playMs);$('hQuiz').textContent=fmt(state.quizMs);$('levelProgress').style.width=(state.questions.length?Math.max(0,Math.min(100,(state.qid+Math.min(1,state.hero.x/Math.max(1,state.finishX)))/state.questions.length*100)):0)+'%';}
+ Object.assign(state,{cfg:a.cfg,questions:qs,qid:a.qid,current:null,answered:false,history:a.history,right:a.right,score:a.score,lives:Number.isInteger(a.lives)?Math.max(1,Math.min(MAX_LIVES,a.lives)):MAX_LIVES,enemyHits:Number.isInteger(a.enemyHits)?Math.max(0,a.enemyHits):0,falls:Number.isInteger(a.falls)?Math.max(0,a.falls):0,playMs:a.playMs,quizMs:a.quizMs,clock:0,invul:0,worldSeed:Number.isInteger(a.worldSeed)?a.worldSeed:0});state.keys={};getSegment(Math.floor(a.qid/SEGMENT_SIZE)*SEGMENT_SIZE);updateHud();setMode('running');}
+function updateHud(){ $('hProgress').textContent=state.qid+'/'+(state.questions.length||getPool(getCfg()).length);$('hRight').textContent=state.right;$('hScore').textContent=state.score;$('hLives').textContent='♥ '+state.lives+'/'+MAX_LIVES;$('hPlay').textContent=fmt(state.playMs);$('hQuiz').textContent=fmt(state.quizMs);$('levelProgress').style.width=(state.questions.length?Math.max(0,Math.min(100,(state.qid+Math.min(1,state.hero.x/Math.max(1,state.finishX)))/state.questions.length*100)):0)+'%';}
 function showQuestion(){state.current=state.questions[state.qid];if(!state.current){finish();return;}state.answered=false;const q=state.current;setMode('question');$('qGreek').classList.toggle('is-description',q.task==='form');$('qOptions').classList.toggle('analysis-options',q.task==='analyse');$('qType').textContent=`ΠΥΛΗ ${state.qid+1} ΑΠΟ ${state.questions.length} • ${q.x.verb} • ${({1:'ΒΑΣΙΚΟ',2:'ΜΕΣΑΙΟ',3:'ΠΡΟΧΩΡΗΜΕΝΟ'}[q.x.tier])}`;$('qTitle').textContent=q.task==='analyse'?'Αναγνώριση τύπου':'Σχηματισμός τύπου';$('qPrompt').textContent=q.prompt;$('qGreek').textContent=q.main;$('qFeedback').textContent='';$('nextBtn').hidden=true;$('qCountLabel').textContent='Επίλεξε μία από τις τέσσερις απαντήσεις ή πάτησε 1–4.';const target=$('qOptions');target.replaceChildren();q.choices.forEach((opt,i)=>{const b=document.createElement('button');b.className='choice';b.textContent=(i+1)+'. '+opt;b.dataset.index=i;b.addEventListener('click',()=>answer(i));target.appendChild(b);});setTimeout(()=>target.querySelector('button')?.focus(),0);}
 function answer(i){if(state.mode!=='question'||state.answered)return;const q=state.current,userAnswer=q.choices[i],right=userAnswer===q.answer;state.answered=true;state.history.push({index:state.qid+1,question:q.prompt+' '+q.main,response:userAnswer,correct:q.answer,ok:right});if(right){state.right++;state.score+=100;}else{state.score=Math.max(0,state.score-15);} [...$('qOptions').children].forEach((b,k)=>{b.disabled=true;if(q.choices[k]===q.answer)b.classList.add('correct');if(k===i&&!right)b.classList.add('wrong');});$('qFeedback').textContent=right?'Σωστά! Η πύλη άνοιξε.':'Λανθασμένη επιλογή. Σωστή απάντηση: '+q.answer;$('nextBtn').hidden=false;$('qCountLabel').textContent=label(q.x)+' · '+rarityLabel(q.x.tier)+(q.x.variant?' (εναλλακτική μορφή)':'')+' · '+q.x.source;$('nextBtn').focus();updateHud();saveCampaign();}
 function next(){
@@ -590,11 +601,46 @@ function next(){
  }
  state.keys={};setMode('running');updateRegionLabel();saveCampaign();
 }
-function finish(){setMode('end');$('endTitle').textContent='Ολοκλήρωσες την περιπέτεια!';$('endMessage').textContent='Ολοκλήρωσες '+state.qid+' από '+state.questions.length+' μορφολογικές εγγραφές. '+(state.cfg.count===-1?'Πλήρης κάλυψη της επιλεγμένης ύλης.':'Σύντομη εξάσκηση.');$('resCorrect').textContent=state.right+'/'+state.history.length;$('resScore').textContent=state.score;$('resPercent').textContent=(state.history.length?Math.round(state.right/state.history.length*100):0)+'%';$('resPlay').textContent=fmt(state.playMs);$('resQuiz').textContent=fmt(state.quizMs);$('resTotal').textContent=fmt(state.playMs+state.quizMs);try{if(state.cfg.count===-1)localStorage.removeItem(SAVE_KEY);}catch(e){}$('reviewSection').hidden=true;$('showAnswersBtn').textContent='Προβολή απαντήσεων';let body=$('reportRows');body.replaceChildren();for(const h of state.history){const tr=document.createElement('tr');for(let val of [h.index,h.question,h.response,h.correct,h.ok?'Σωστό':'Λάθος']){let td=document.createElement('td');td.textContent=val;tr.appendChild(td);}tr.lastChild.style.color=h.ok?'#89edbd':'#ffaca7';body.appendChild(tr);}updateHud();}
+function endRun(isDefeat,reason=''){
+ // Κοινός πίνακας αποτελεσμάτων για κανονικό τερματισμό και απώλεια ζωών.
+ if(state.mode==='end')return;
+ state.keys={};
+ setMode('end');
+ $('endRibbon').textContent=isDefeat?'ΤΕΛΟΣ ΠΑΙΧΝΙΔΙΟΥ':'ΤΕΛΟΣ ΠΕΡΙΠΕΤΕΙΑΣ';
+ $('endTitle').textContent=isDefeat?'Τέλος παιχνιδιού':'Ολοκλήρωσες την περιπέτεια!';
+ $('endMessage').textContent=isDefeat
+  ?'Έχασες και τις '+MAX_LIVES+' ζωές σου. '+reason+'. Ολοκλήρωσες '+state.qid+' από '+state.questions.length+' πύλες. Επίλεξε «Αρχή από την αρχή» για νέα παρτίδα.'
+  :'Ολοκλήρωσες '+state.qid+' από '+state.questions.length+' μορφολογικές εγγραφές. '+(state.cfg.count===-1?'Πλήρης κάλυψη της επιλεγμένης ύλης.':'Σύντομη εξάσκηση.');
+ $('resCorrect').textContent=state.right+'/'+state.history.length;
+ $('resScore').textContent=state.score;
+ $('resPercent').textContent=(state.history.length?Math.round(state.right/state.history.length*100):0)+'%';
+ $('resGates').textContent=state.qid+'/'+state.questions.length;
+ $('resLives').textContent=state.lives+'/'+MAX_LIVES;
+ $('resEnemyHits').textContent=state.enemyHits;
+ $('resFalls').textContent=state.falls;
+ $('resPlay').textContent=fmt(state.playMs);
+ $('resQuiz').textContent=fmt(state.quizMs);
+ $('resTotal').textContent=fmt(state.playMs+state.quizMs);
+ // Δεν μπορεί να παρακαμφθεί το τέλος παιχνιδιού με επαναφορά αποθηκευμένης παρτίδας.
+ try{if(state.cfg.count===-1)localStorage.removeItem(SAVE_KEY);}catch(e){}
+ $('reviewSection').hidden=true;
+ $('showAnswersBtn').textContent='Προβολή απαντήσεων';
+ const body=$('reportRows');body.replaceChildren();
+ for(const h of state.history){
+  const tr=document.createElement('tr');
+  for(const val of [h.index,h.question,h.response,h.correct,h.ok?'Σωστό':'Λάθος']){
+   const td=document.createElement('td');td.textContent=val;tr.appendChild(td);
+  }
+  tr.lastChild.style.color=h.ok?'#89edbd':'#ffaca7';body.appendChild(tr);
+ }
+ updateHud();
+}
+function gameOver(reason){endRun(true,reason);}
+function finish(){endRun(false);}
 function showMenu(){saveCampaign();state.keys={};setMode('menu');updateResume();$('startTitle').textContent='Έτοιμος για νέα περιπέτεια;';}
 function togglePause(){if(state.mode==='running'){saveCampaign();setMode('pause');state.keys={};}else if(state.mode==='pause')setMode('running');}
 $('startBtn').onclick=reset;$('resumeSavedBtn').onclick=resumeCampaign;$('restartBtn').onclick=showMenu;$('pauseBtn').onclick=togglePause;$('resumeBtn').onclick=()=>setMode('running');$('newFromPause').onclick=showMenu;$('helpBtn').onclick=()=>{if(state.mode==='running')setMode('pause');else if(state.mode==='menu'){$('coverage').hidden=false;$('coverage').textContent='Κίνηση με ← / → (ή A/D), άλμα με διάστημα / ↑. Στις ερωτήσεις πάτησε 1–4. Η σειρά ανακατεύεται σε κάθε νέα παρτίδα. Στη διαδρομή υπάρχουν πραγματικά χάσματα στο έδαφος και εναλλακτικές υπερυψωμένες πλατφόρμες. Ορισμένες γαλάζιες πύλες βρίσκονται ψηλά και απαιτούν άλμα. Οι αντίπαλοι βρίσκονται αραιότερα, κινούνται πιο μακριά οριζόντια ή ανεβοκατεβαίνουν περισσότερο. Το τοπίο αλλάζει κάθε τέσσερις πύλες. Οι πρώτες πύλες έχουν απλούστερους τύπους και οι επόμενες συνθετότερους, με τυχαία σειρά μέσα σε κάθε βαθμίδα. Στην πύλη σταματά ο χρόνος της πίστας και μετρά ο χρόνος απάντησης.';}};
-$('againBtn').onclick=showMenu;$('nextBtn').onclick=next;$('showAnswersBtn').onclick=()=>{let el=$('reviewSection');el.hidden=!el.hidden;$('showAnswersBtn').textContent=el.hidden?'Προβολή απαντήσεων':'Απόκρυψη απαντήσεων';};
+$('againBtn').onclick=reset;$('endMenuBtn').onclick=showMenu;$('nextBtn').onclick=next;$('showAnswersBtn').onclick=()=>{let el=$('reviewSection');el.hidden=!el.hidden;$('showAnswersBtn').textContent=el.hidden?'Προβολή απαντήσεων':'Απόκρυψη απαντήσεων';};
 $('morphBtn').onclick=()=>{const e=$('coverage');e.hidden=!e.hidden;e.innerHTML=`<p><b>εἰμί:</b> ενεστώτας (οριστική, υποτακτική, ευκτική, προστακτική), παρατατικός (μόνο οριστική), μέλλοντας με τύπους μέσης φωνής (οριστική, ευκτική), απαρέμφατα, μετοχές. <b>λύω:</b> παραγωγικοί χρόνοι, εγκλίσεις και φωνές όπου σχηματίζονται, απαρέμφατα, μετοχές με τρία γένη και πέντε πτώσεις στον ενικό και πληθυντικό.</p><p>Η κλητική αρσενικού ενικού των μετοχών σε -μενος λήγει σε -μενε (π.χ. λυόμενε), ενώ άλλες μετοχές συχνά έχουν την ίδια μορφή με την ονομαστική. Οι περιφραστικές μορφές του παρακειμένου και οι σπάνιες μορφές του συντελεσμένου μέλλοντα είναι μόνο για το προχωρημένο επίπεδο. Οι τύποι ἐγενόμην, γέγονα ανήκουν στο γίγνομαι, όχι μορφολογικά στο εἰμί. Ορισμένες προχωρημένες μορφές αποτελούν υποδειγματικούς γραμματικούς σχηματισμούς, όχι τεκμήριο συχνής χρήσης στην κλασική γραμματεία.</p><p>Πηγές: <a href="https://grammars.alpheios.net/smyth/xhtml/body.1_div1.2_div2.9.html" target="_blank" rel="noopener">Smyth §383</a>, <a href="https://grammars.alpheios.net/smyth/xhtml/body.1_div1.2_div2.10.html" target="_blank" rel="noopener">Smyth §768</a>, <a href="https://services.perseids.org/sg/body.1_div1.2_div2.4.html" target="_blank" rel="noopener">Smyth §305 (μετοχές)</a>. Ενσωματωμένες μορφές: ${rows.length}, χωρίς δυϊκό.</p>`;};
 
 let tablePage=0;
@@ -620,7 +666,26 @@ $('tableNext').onclick=()=>{tablePage++;renderParadigm();};
 populateTableFilters();
 $('exportBankBtn').onclick=()=>{const a=[['Ρήμα','Χρόνος','Φωνή','Έγκλιση / Τύπος','Πρόσωπο','Αριθμός','Γένος','Πτώση','Τύπος','Επίπεδο','Σημειώσεις','Πηγή'],...rows.map(x=>[x.verb,x.tense,x.voice,x.mood,x.person||'',x.number||'',x.gender||'',x.gramCase||'',x.form,rarityLabel(x.tier),x.note||'',x.source])];downloadCsv(a,'super-filologos-pliris-klisi-v3.csv');};
 function downloadCsv(a,name){const enc=s=>'"'+String(s).replaceAll('"','""')+'"';const csv='\ufeff'+a.map(r=>r.map(enc).join(';')).join('\r\n');const url=URL.createObjectURL(new Blob([csv],{type:'text/csv;charset=utf-8'}));const link=document.createElement('a');link.href=url;link.download=name;link.click();setTimeout(()=>URL.revokeObjectURL(url),1500);}
-$('csvBtn').onclick=()=>{const encode=s=>'"'+String(s).replaceAll('"','""')+'"';let a=[['Α/Α','Ερώτηση','Απάντηση παίκτη','Σωστή απάντηση','Ορθότητα'],...state.history.map(x=>[x.index,x.question,x.response,x.correct,x.ok?'Σωστό':'Λάθος'])];const csv='\ufeff'+a.map(r=>r.map(encode).join(';')).join('\r\n');const url=URL.createObjectURL(new Blob([csv],{type:'text/csv;charset=utf-8'}));const link=document.createElement('a');link.href=url;link.download='super-filologos-apotelesmata.csv';link.click();setTimeout(()=>URL.revokeObjectURL(url),1000);};
+$('csvBtn').onclick=()=>{
+ const summary=[
+  ['Στατιστικά παρτίδας',''],
+  ['Κατάσταση',state.lives===0?'Τέλος παιχνιδιού':'Ολοκλήρωση'],
+  ['Πύλες',state.qid+'/'+state.questions.length],
+  ['Σωστές απαντήσεις',state.right],
+  ['Απαντημένες ερωτήσεις',state.history.length],
+  ['Ποσοστό επιτυχίας',(state.history.length?Math.round(state.right/state.history.length*100):0)+'%'],
+  ['Βαθμολογία',state.score],
+  ['Ζωές που απέμειναν',state.lives+'/'+MAX_LIVES],
+  ['Συγκρούσεις με εχθρούς',state.enemyHits],
+  ['Πτώσεις σε χάσματα',state.falls],
+  ['Χρόνος πίστας',fmt(state.playMs)],
+  ['Χρόνος ερωτήσεων',fmt(state.quizMs)],
+  ['Συνολικός χρόνος',fmt(state.playMs+state.quizMs)],
+  [],
+  ['Α/Α','Ερώτηση','Απάντηση παίκτη','Σωστή απάντηση','Ορθότητα']
+ ];
+ downloadCsv(summary.concat(state.history.map(x=>[x.index,x.question,x.response,x.correct,x.ok?'Σωστό':'Λάθος'])),'super-filologos-apotelesmata.csv');
+};
 function setKey(id,key){const b=$(id);function down(e){e.preventDefault();state.keys[key]=true;b.classList.add('pressed');try{b.setPointerCapture(e.pointerId);}catch(_){}}function up(e){e.preventDefault();state.keys[key]=false;b.classList.remove('pressed');}b.addEventListener('pointerdown',down);for(const t of ['pointerup','pointercancel','lostpointercapture'])b.addEventListener(t,up);}
 setKey('leftBtn','left');setKey('rightBtn','right');setKey('jumpBtn','jump');
 window.addEventListener('keydown',e=>{if(['ArrowLeft','ArrowRight','ArrowUp','Space','KeyA','KeyD','KeyW','KeyP','Digit1','Digit2','Digit3','Digit4'].includes(e.code)&&!['SELECT','INPUT'].includes(document.activeElement.tagName))e.preventDefault();if(['ArrowLeft','KeyA'].includes(e.code))state.keys.left=true;if(['ArrowRight','KeyD'].includes(e.code))state.keys.right=true;if(['Space','ArrowUp','KeyW'].includes(e.code))state.keys.jump=true;if(e.code==='KeyP'&& !e.repeat)togglePause();if(state.mode==='question'){let m=/^Digit([1-4])$/.exec(e.code);if(m)answer(Number(m[1])-1);if(e.code==='Enter'&&state.answered)next();}});
@@ -778,7 +843,7 @@ function advanceHero(factor){
   }
  }
  // Σε χάσμα η πτώση είναι πραγματική· επαναφορά πριν από το χάσμα.
- if(h.y>HEIGHT+30){loseLife('Πτώση σε χάσμα',h.x);return;}
+ if(h.y>HEIGHT+30){loseLife('Πτώση σε χάσμα',h.x,'fall');return;}
  // Η επόμενη πύλη δεν παρακάμπτεται τρέχοντας από κάτω ή πηδώντας από πάνω.
  const idx=state.qid-state.segmentStart,g=state.gates[idx];
  if(g){
@@ -800,13 +865,14 @@ function tick(now){
    const h=state.hero;
    if(!state.invul){for(const mob of state.enemies){
     if(h.x+h.w>mob.x+4&&h.x<mob.x+mob.w-4&&h.y+h.h>mob.y+5&&h.y<mob.y+mob.h-5){
-     if(h.vy>2&&h.y+h.h<=mob.y+20){state.score+=20;h.vy=-8.5;state.invul=650;}
-     else loseLife('Πρόσεξε τους αντιπάλους',h.x);
+     loseLife('Σύγκρουση με εχθρό',h.x,'enemy');
      break;
     }
    }}
-   for(const co of state.coinPositions){if(!state.coins.has(co.id)&&Math.abs(h.x+15-co.x)<26&&Math.abs(h.y+18-co.y)<35){state.coins.add(co.id);state.score+=10;}}
-   if(h.x>=state.finishX&&state.qid===state.questions.length)finish();
+   if(state.mode==='running'){
+    for(const co of state.coinPositions){if(!state.coins.has(co.id)&&Math.abs(h.x+15-co.x)<26&&Math.abs(h.y+18-co.y)<35){state.coins.add(co.id);state.score+=10;}}
+    if(h.x>=state.finishX&&state.qid===state.questions.length)finish();
+   }
   }
   state.camera=Math.max(0,state.hero.x-240);updateHud();
  }else if(state.mode==='question'){state.quizMs+=dt;updateHud();}

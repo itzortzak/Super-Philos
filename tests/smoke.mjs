@@ -4,8 +4,8 @@ import vm from 'node:vm';
 
 const html = readFileSync('index.html','utf8');
 const version = readFileSync('VERSION','utf8').trim();
-assert.equal(version,'3.3');
-assert.match(html, /v3\.3/);
+assert.equal(version,'3.4');
+assert.match(html, /v3\.4/);
 assert.doesNotMatch(html, / • χωρίς δυϊκό/);
 assert.match(html, /function difficultyBand\(x\)/);
 assert.match(html, /function selectProgressiveQuestions\(/);

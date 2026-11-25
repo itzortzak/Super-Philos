@@ -62,9 +62,9 @@ assert.equal(localStorage.getItem(SAVE_KEY),null,'game over must clear resumable
 loseLife('Πτώση σε χάσμα',400,'fall');
 assert.equal(state.falls,1);assert.equal(state.lives,0,'no losses can occur after game over');
 // The real reset() must restore seven lives, counters and all other session statistics.
-const resetFn=new Function('state','MAX_LIVES','getCfg','buildQuiz','ensureFreshOpening','getPool','getSegment','updateHud','$','setMode','saveCampaign','localStorage','SAVE_KEY','SCENES',reset+'\nreturn reset;')(
+const resetFn=new Function('state','MAX_LIVES','getCfg','buildQuiz','ensureFreshOpening','getPool','getSegment','updateHud','$','setMode','saveCampaign','localStorage','SAVE_KEY','SCENES','rarityLabel',reset+'\nreturn reset;')(
  state,MAX_LIVES,()=>({count:2,tier:1}),
- ()=>[{x:{_id:0}},{x:{_id:1}}],()=>{},()=>[1,2],()=>{},updateHud,$,setMode,saveCampaign,localStorage,SAVE_KEY,[{},{}]
+ ()=>[{x:{_id:0}},{x:{_id:1}}],()=>{},()=>[1,2],()=>{},updateHud,$,setMode,saveCampaign,localStorage,SAVE_KEY,[{},{}],()=> 'βασικό'
 );
 resetFn();
 assert.equal(state.lives,7);assert.equal(state.enemyHits,0);assert.equal(state.falls,0);
